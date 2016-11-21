@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg" >
+
+    <TextView
+        android:id="@+id/ot_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="标题："
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/ot_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ot_title"
+        android:layout_marginTop="40dp"
+        android:text="账号："
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/ot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ot_user"
+        android:layout_marginTop="40dp"
+        android:text="密码："
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/ot_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ot_password"
+        android:layout_marginTop="40dp"
+        android:text="备注："
+        android:textSize="25dp" />
+
+    <EditText
+        android:id="@+id/et_ot_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ot_title"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/ot_title"
+        android:background="@drawable/et_shape"
+        android:ems="10"
+        />
+
+    <EditText
+        android:id="@+id/et_ot_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ot_user"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/ot_user"
+        android:layout_toRightOf="@+id/ot_user"
+        android:background="@drawable/et_shape"
+        android:ems="10" />
+
+    <EditText
+        android:id="@+id/et_ot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ot_password"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/ot_password"
+        android:layout_toRightOf="@+id/ot_password"
+        android:background="@drawable/et_shape"
+        android:ems="10" />
+
+    <EditText
+        android:id="@+id/et_ot_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/ot_note"
+        android:layout_above="@+id/linearLayout4"
+        android:background="@drawable/et_shape"
+        android:gravity="top"
+        android:ems="10" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal" >   
+
+        <Button
+            android:id="@+id/update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:text="修改" />
+
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:text="删除" />
+
+        <Button
+            android:id="@+id/ot_sh_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:text="取消" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg">
+
+    <TextView
+        android:id="@+id/select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:textSize="25dp"
+        android:text="请输入要查询的账号：" />
+
+    <EditText
+        android:id="@+id/et_select"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/select"
+        android:hint="输入保存账号时的标题信息"
+        android:textSize="25dp"
+        android:background="@drawable/et_shape"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_select"
+            android:orientation="horizontal"
+             >
+
+        <Button
+            android:id="@+id/ot_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="25dp"
+            android:background="@drawable/button_selector"
+            android:text="查询" />
+
+        <Button
+            android:id="@+id/ot_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="25dp"
+            android:background="@drawable/button_selector"
+            android:text="取消" />
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayout2"
+            android:textSize="15dp"
+            android:text="查询结果（输入为空时，查询则显示所有结果。）：" />
+        
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" >
+
+        <ListView
+            android:id="@+id/lv_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" >
+        </ListView>
+        
+        </LinearLayout>
+
+</RelativeLayout>
