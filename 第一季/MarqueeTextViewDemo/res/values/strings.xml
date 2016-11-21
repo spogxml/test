@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">"MarqueeTextViewDemo "</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">我是一个TextView，我是一个长TextView，我是一个长TextView。</string>
+</resources>
