@@ -19,18 +19,18 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class InputActivity extends Activity {
-	//³õÊ¼»¯ÊäÈëÊı¾İ½çÃæµÄ¿Ø¼ş
+	//åˆå§‹åŒ–è¾“å…¥æ•°æ®ç•Œé¢çš„æ§ä»¶
 	private EditText ed_title;
 	private EditText ed_user;
 	private EditText ed_password;
 	private EditText ed_note;
 	private Button in_confirm;
 	private Button in_cancel;
-	//´æ·ÅÊı¾İµÄÖĞ½é
+	//å­˜æ”¾æ•°æ®çš„ä¸­ä»‹
 	private MyData mdata;
-	//Êı¾İ¿âÀà
+	//æ•°æ®åº“ç±»
 	private MyDataDB iDB;
-	//ÅĞ¶ÏÌí¼ÓÊÇ·ñ³É¹¦
+	//åˆ¤æ–­æ·»åŠ æ˜¯å¦æˆåŠŸ
 	private int i;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,19 +43,19 @@ public class InputActivity extends Activity {
 		ed_note=(EditText) findViewById(R.id.ed_note);
 		in_confirm=(Button) findViewById(R.id.in_confirm);
 		in_cancel=(Button) findViewById(R.id.in_cancel);
-		//Ä¬ÈÏ±êÌâ»ñÈ¡½¹µã
+		//é»˜è®¤æ ‡é¢˜è·å–ç„¦ç‚¹
 		ed_title.requestFocus();
-		//È·ÈÏ°´Å¥µÄµã»÷ÊÂ¼ş
+		//ç¡®è®¤æŒ‰é’®çš„ç‚¹å‡»äº‹ä»¶
 		in_confirm.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//Èç¹ûÓĞÊäÈë¿òÎª¿Õ£¬ÔòÎŞ·¨Ìí¼Ó
+				//å¦‚æœæœ‰è¾“å…¥æ¡†ä¸ºç©ºï¼Œåˆ™æ— æ³•æ·»åŠ 
 				if(TextUtils.isEmpty(ed_title.getText())||TextUtils.isEmpty(ed_user.getText())
 						||TextUtils.isEmpty(ed_password.getText())||TextUtils.isEmpty(ed_note.getText())){
 					AlertDialog.Builder builder1  = new Builder(InputActivity.this);
-					builder1.setTitle("ÌáÊ¾£¡" ) ;
-					builder1.setMessage("ÇëÈ·ÈÏËùÓĞÊäÈëÊı¾İ²»ÄÜÎª¿Õ£¡" ) ;
-					builder1.setPositiveButton("ºÃ" ,new DialogInterface.OnClickListener()
+					builder1.setTitle("æç¤ºï¼" ) ;
+					builder1.setMessage("è¯·ç¡®è®¤æ‰€æœ‰è¾“å…¥æ•°æ®ä¸èƒ½ä¸ºç©ºï¼" ) ;
+					builder1.setPositiveButton("å¥½" ,new DialogInterface.OnClickListener()
 					{
 
 						@Override
@@ -66,25 +66,25 @@ public class InputActivity extends Activity {
 					});
 					builder1.setCancelable(false);
 					builder1.show(); 
-				}//Ìí¼ÓÊı¾İ
+				}//æ·»åŠ æ•°æ®
 				else{
-					mdata=new MyData();//³õÊ¼»¯²¢»ñÈ¡ÊäÈë¿òÄÚÈİ
+					mdata=new MyData();//åˆå§‹åŒ–å¹¶è·å–è¾“å…¥æ¡†å†…å®¹
 					mdata.title=ed_title.getText().toString();
 					mdata.user=ed_user.getText().toString();
 					mdata.password=ed_password.getText().toString();
 					mdata.note=ed_note.getText().toString();
 
-					//²åÈëÊı¾İÊ±ÏÈ²éÑ¯ÅĞ¶ÏÊı¾İ¿âµ±ÖĞÊÇ·ñÓĞºÍµ±Ç°Êı¾İ±êÌâÒ»ÑùµÄÊı¾İ£¬Èç¹ûÓĞÔòÌáÊ¾²»ÄÜ²åÈë£¬Ã»ÓĞÔò²åÈë
-					//´ò¿ªÊı¾İ¿â£¬²éÑ¯Êı¾İ
+					//æ’å…¥æ•°æ®æ—¶å…ˆæŸ¥è¯¢åˆ¤æ–­æ•°æ®åº“å½“ä¸­æ˜¯å¦æœ‰å’Œå½“å‰æ•°æ®æ ‡é¢˜ä¸€æ ·çš„æ•°æ®ï¼Œå¦‚æœæœ‰åˆ™æç¤ºä¸èƒ½æ’å…¥ï¼Œæ²¡æœ‰åˆ™æ’å…¥
+					//æ‰“å¼€æ•°æ®åº“ï¼ŒæŸ¥è¯¢æ•°æ®
 					iDB=new MyDataDB();
 					iDB.initDB(InputActivity.this);
 					List<Map<String,String>> arr_inlist=new ArrayList<Map<String,String>>();
 					arr_inlist=iDB.queryDB(mdata.title);
-					//Èç¹ûÓĞºÍµ±Ç°Êı¾İÒ»Ñù±êÌâµÄÔò²»ÄÜ²åÈë
+					//å¦‚æœæœ‰å’Œå½“å‰æ•°æ®ä¸€æ ·æ ‡é¢˜çš„åˆ™ä¸èƒ½æ’å…¥
 					if(arr_inlist!=null){
 						AlertDialog.Builder builder19  = new Builder(InputActivity.this);
-						builder19.setTitle("ÌáÊ¾£¡").setMessage("µ±Ç°Êı¾İ±êÌâËù´æÄÚÈİÒÑ´æÔÚ£¬ÇëĞŞ¸Ä±êÌâ£¡");
-						builder19.setPositiveButton("È·ÈÏ",new DialogInterface.OnClickListener()
+						builder19.setTitle("æç¤ºï¼").setMessage("å½“å‰æ•°æ®æ ‡é¢˜æ‰€å­˜å†…å®¹å·²å­˜åœ¨ï¼Œè¯·ä¿®æ”¹æ ‡é¢˜ï¼");
+						builder19.setPositiveButton("ç¡®è®¤",new DialogInterface.OnClickListener()
 						{
 
 							@Override
@@ -96,18 +96,18 @@ public class InputActivity extends Activity {
 						builder19.setCancelable(false);
 						builder19.show();
 						
-					}//Ã»ÓĞÔò¿ÉÒÔ²åÈë
+					}//æ²¡æœ‰åˆ™å¯ä»¥æ’å…¥
 					else{
-						//´ò¿ªÊı¾İ¿â£¬²åÈëÊı¾İ
+						//æ‰“å¼€æ•°æ®åº“ï¼Œæ’å…¥æ•°æ®
 						iDB=new MyDataDB();
 						iDB.initDB(InputActivity.this);
 						i=iDB.insertDB(InputActivity.this, mdata);
-						//Ìí¼ÓÊ§°ÜÊ±µ¯³ö¶Ô»°¿ò
+						//æ·»åŠ å¤±è´¥æ—¶å¼¹å‡ºå¯¹è¯æ¡†
 						if(i==0){
 							AlertDialog.Builder builder2  = new Builder(InputActivity.this);
-							builder2.setTitle("ÌáÊ¾£¡" ) ;
-							builder2.setMessage("Ìí¼ÓÊ§°Ü£¡ÇëÈ·ÈÏ¿Õ¼äÊÇ·ñ×ã¹»£¡" ) ;
-							builder2.setPositiveButton("ºÃ" , new DialogInterface.OnClickListener() {  
+							builder2.setTitle("æç¤ºï¼" ) ;
+							builder2.setMessage("æ·»åŠ å¤±è´¥ï¼è¯·ç¡®è®¤ç©ºé—´æ˜¯å¦è¶³å¤Ÿï¼" ) ;
+							builder2.setPositiveButton("å¥½" , new DialogInterface.OnClickListener() {  
 								@Override  
 								public void onClick(DialogInterface dialog, int which) {
 									Intent toHome=new Intent(InputActivity.this, MainActivity.class);
@@ -118,11 +118,11 @@ public class InputActivity extends Activity {
 							builder2.setCancelable(false);
 							builder2.show(); 
 						}
-						//Ìí¼Ó³É¹¦Ê±Ê±µ¯³ö¶Ô»°¿ò
+						//æ·»åŠ æˆåŠŸæ—¶æ—¶å¼¹å‡ºå¯¹è¯æ¡†
 						else {
 							AlertDialog.Builder builder3  = new Builder(InputActivity.this);
-							builder3.setTitle("Ìí¼Ó³É¹¦£¡").setMessage("Êı¾İÌí¼Ó³É¹¦£¡");
-							builder3.setPositiveButton("¼ÌĞøÌí¼Ó",new DialogInterface.OnClickListener() {  
+							builder3.setTitle("æ·»åŠ æˆåŠŸï¼").setMessage("æ•°æ®æ·»åŠ æˆåŠŸï¼");
+							builder3.setPositiveButton("ç»§ç»­æ·»åŠ ",new DialogInterface.OnClickListener() {  
 								@Override  
 								public void onClick(DialogInterface dialog, int which) {
 									ed_title.setText("");
@@ -132,7 +132,7 @@ public class InputActivity extends Activity {
 									dialog.dismiss();
 								}  
 							});
-							builder3.setNegativeButton("·µ»ØÖ÷Ò³Ãæ",new DialogInterface.OnClickListener() {  
+							builder3.setNegativeButton("è¿”å›ä¸»é¡µé¢",new DialogInterface.OnClickListener() {  
 								@Override  
 								public void onClick(DialogInterface dialog, int which) {
 									Intent toHome=new Intent(InputActivity.this, MainActivity.class);
@@ -147,22 +147,22 @@ public class InputActivity extends Activity {
 				}
 			}
 		});
-		//È¡Ïû°´Å¥µÄµã»÷ÊÂ¼ş
+		//å–æ¶ˆæŒ‰é’®çš„ç‚¹å‡»äº‹ä»¶
 		in_cancel.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				//µ±ËùÓĞÊäÈë¿òÈ«Îª¿ÕÊ±£¬Ö±½Ó·µ»ØÖ÷Ò³Ãæ
+				//å½“æ‰€æœ‰è¾“å…¥æ¡†å…¨ä¸ºç©ºæ—¶ï¼Œç›´æ¥è¿”å›ä¸»é¡µé¢
 				if(TextUtils.isEmpty(ed_title.getText())&&TextUtils.isEmpty(ed_user.getText())
 						&&TextUtils.isEmpty(ed_password.getText())&&TextUtils.isEmpty(ed_note.getText())){
 					Intent toHome=new Intent(InputActivity.this, MainActivity.class);
 					startActivity(toHome);
 					finish();
 				}else{
-					//µ±ÓĞÒ»¸öÊäÈë¿ò²»Îª¿ÕÊ±£¬µ¯³öÌáÊ¾¿ò
+					//å½“æœ‰ä¸€ä¸ªè¾“å…¥æ¡†ä¸ä¸ºç©ºæ—¶ï¼Œå¼¹å‡ºæç¤ºæ¡†
 					AlertDialog.Builder builder4  = new Builder(InputActivity.this);
-					builder4.setTitle("ÌáÊ¾£¡").setMessage("Êı¾İÃ»ÓĞÊäÈëÍê³É£¬ÊÇ·ñÈ·ÈÏ·µ»ØÖ÷Ò³Ãæ");
-					builder4.setPositiveButton("¼ÌĞøÌí¼Ó",new DialogInterface.OnClickListener()
+					builder4.setTitle("æç¤ºï¼").setMessage("æ•°æ®æ²¡æœ‰è¾“å…¥å®Œæˆï¼Œæ˜¯å¦ç¡®è®¤è¿”å›ä¸»é¡µé¢");
+					builder4.setPositiveButton("ç»§ç»­æ·»åŠ ",new DialogInterface.OnClickListener()
 					{
 
 						@Override
@@ -171,7 +171,7 @@ public class InputActivity extends Activity {
 							dialog.dismiss();
 						}
 					});
-					builder4.setNegativeButton("·µ»ØÖ÷Ò³Ãæ",new DialogInterface.OnClickListener() {  
+					builder4.setNegativeButton("è¿”å›ä¸»é¡µé¢",new DialogInterface.OnClickListener() {  
 						@Override  
 						public void onClick(DialogInterface dialog, int which) {
 							Intent toHome=new Intent(InputActivity.this, MainActivity.class);
@@ -186,20 +186,20 @@ public class InputActivity extends Activity {
 		});
 	}
 
-	//×Ô¶¨Òå·µ»Ø¼ü¹¦ÄÜ£¬ºÍÈ¡Ïû¼üÒ»Ñù
+	//è‡ªå®šä¹‰è¿”å›é”®åŠŸèƒ½ï¼Œå’Œå–æ¶ˆé”®ä¸€æ ·
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			//µ±ËùÓĞÊäÈë¿òÈ«Îª¿ÕÊ±£¬Ö±½Ó·µ»ØÖ÷Ò³Ãæ
+			//å½“æ‰€æœ‰è¾“å…¥æ¡†å…¨ä¸ºç©ºæ—¶ï¼Œç›´æ¥è¿”å›ä¸»é¡µé¢
 			if(TextUtils.isEmpty(ed_title.getText())&&TextUtils.isEmpty(ed_user.getText())
 					&&TextUtils.isEmpty(ed_password.getText())&&TextUtils.isEmpty(ed_note.getText())){
 				Intent toHome=new Intent(InputActivity.this, MainActivity.class);
 				startActivity(toHome);
 				finish();
 			}else{
-				//µ±ÓĞÒ»¸öÊäÈë¿ò²»Îª¿ÕÊ±£¬µ¯³öÌáÊ¾¿ò
+				//å½“æœ‰ä¸€ä¸ªè¾“å…¥æ¡†ä¸ä¸ºç©ºæ—¶ï¼Œå¼¹å‡ºæç¤ºæ¡†
 				AlertDialog.Builder builder5  = new Builder(InputActivity.this);
-				builder5.setTitle("ÌáÊ¾£¡").setMessage("Êı¾İÃ»ÓĞÊäÈëÍê³É£¬ÊÇ·ñÈ·ÈÏ·µ»ØÖ÷Ò³Ãæ");
-				builder5.setPositiveButton("¼ÌĞøÌí¼Ó",new DialogInterface.OnClickListener()
+				builder5.setTitle("æç¤ºï¼").setMessage("æ•°æ®æ²¡æœ‰è¾“å…¥å®Œæˆï¼Œæ˜¯å¦ç¡®è®¤è¿”å›ä¸»é¡µé¢");
+				builder5.setPositiveButton("ç»§ç»­æ·»åŠ ",new DialogInterface.OnClickListener()
 				{
 
 					@Override
@@ -208,7 +208,7 @@ public class InputActivity extends Activity {
 						dialog.dismiss();
 					}
 				});
-				builder5.setNegativeButton("·µ»ØÖ÷Ò³Ãæ",new DialogInterface.OnClickListener() {  
+				builder5.setNegativeButton("è¿”å›ä¸»é¡µé¢",new DialogInterface.OnClickListener() {  
 					@Override  
 					public void onClick(DialogInterface dialog, int which) {
 						Intent toHome=new Intent(InputActivity.this, MainActivity.class);

@@ -44,12 +44,12 @@ public class MainActivity extends Activity {
 
 	}
 
-	//×Ô¶¨Òå·µ»Ø¼ü¹¦ÄÜ
+	//è‡ªå®šä¹‰è¿”å›é”®åŠŸèƒ½
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			AlertDialog.Builder builder16  = new Builder(MainActivity.this);
-			builder16.setTitle("ÌáÊ¾£¡").setMessage("ÊÇ·ñÍË³ö³ÌĞò!");
-			builder16.setPositiveButton("ÊÇ",new DialogInterface.OnClickListener()
+			builder16.setTitle("æç¤ºï¼").setMessage("æ˜¯å¦é€€å‡ºç¨‹åº!");
+			builder16.setPositiveButton("æ˜¯",new DialogInterface.OnClickListener()
 			{
 				@Override
 				public   void  onClick(DialogInterface dialog,  int  which)
@@ -57,7 +57,7 @@ public class MainActivity extends Activity {
 					finish();  
 				}
 			});
-			builder16.setNegativeButton("·ñ",new DialogInterface.OnClickListener() {  
+			builder16.setNegativeButton("å¦",new DialogInterface.OnClickListener() {  
 				@Override  
 				public void onClick(DialogInterface dialog, int which) {
 					

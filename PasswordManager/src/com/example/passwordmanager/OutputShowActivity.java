@@ -110,12 +110,29 @@ public class OutputShowActivity extends Activity {
 								dialog.dismiss();
 							}  
 						});
-						builder8.setNegativeButton("返回主页面",new DialogInterface.OnClickListener() {  
+						builder8.setNegativeButton("返回",new DialogInterface.OnClickListener() {  
 							@Override  
 							public void onClick(DialogInterface dialog, int which) {
-								Intent toHome=new Intent(OutputShowActivity.this, MainActivity.class);
-								startActivity(toHome);
-								finish();  
+								AlertDialog.Builder builder24  = new Builder(OutputShowActivity.this);
+								builder24.setTitle("返回！").setMessage("返回查询页面/返回主页面");
+								builder24.setPositiveButton("返回查询页面",new DialogInterface.OnClickListener() {  
+									@Override  
+									public void onClick(DialogInterface dialog, int which) {
+										Intent toSelect=new Intent(OutputShowActivity.this, OutputSelectActivity.class);
+										startActivity(toSelect);
+										finish();
+									}  
+								});
+								builder24.setNegativeButton("返回主页面",new DialogInterface.OnClickListener() {  
+									@Override  
+									public void onClick(DialogInterface dialog, int which) {
+										Intent toHome=new Intent(OutputShowActivity.this, MainActivity.class);
+										startActivity(toHome);
+										finish();  
+									}  
+								});
+								builder24.setCancelable(false);
+								builder24.show();   
 							}  
 						});
 						builder8.setCancelable(false);
@@ -195,16 +212,33 @@ public class OutputShowActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				AlertDialog.Builder builder11  = new Builder(OutputShowActivity.this);
-				builder11.setTitle("提示！").setMessage("是否确认返回主页面!");
+				builder11.setTitle("提示！").setMessage("是否确认返回!");
 				builder11.setPositiveButton("是",new DialogInterface.OnClickListener()
 				{
 
 					@Override
 					public   void  onClick(DialogInterface dialog,  int  which)
 					{
-						Intent toHome=new Intent(OutputShowActivity.this, MainActivity.class);
-						startActivity(toHome);
-						finish();  
+						AlertDialog.Builder builder22  = new Builder(OutputShowActivity.this);
+						builder22.setTitle("返回！").setMessage("返回查询页面/返回主页面");
+						builder22.setPositiveButton("返回查询页面",new DialogInterface.OnClickListener() {  
+							@Override  
+							public void onClick(DialogInterface dialog, int which) {
+								Intent toSelect=new Intent(OutputShowActivity.this, OutputSelectActivity.class);
+								startActivity(toSelect);
+								finish();
+							}  
+						});
+						builder22.setNegativeButton("返回主页面",new DialogInterface.OnClickListener() {  
+							@Override  
+							public void onClick(DialogInterface dialog, int which) {
+								Intent toHome=new Intent(OutputShowActivity.this, MainActivity.class);
+								startActivity(toHome);
+								finish();  
+							}  
+						});
+						builder22.setCancelable(false);
+						builder22.show(); 
 					}
 				});
 				builder11.setNegativeButton("否",new DialogInterface.OnClickListener() {  
@@ -237,16 +271,33 @@ public class OutputShowActivity extends Activity {
 		public boolean onKeyDown(int keyCode, KeyEvent event) {
 			if (keyCode == KeyEvent.KEYCODE_BACK) {
 				AlertDialog.Builder builder12  = new Builder(OutputShowActivity.this);
-				builder12.setTitle("提示！").setMessage("是否确认返回主页面!");
+				builder12.setTitle("提示！").setMessage("是否确认返回!");
 				builder12.setPositiveButton("是",new DialogInterface.OnClickListener()
 				{
 
 					@Override
 					public   void  onClick(DialogInterface dialog,  int  which)
 					{
-						Intent toHome=new Intent(OutputShowActivity.this, MainActivity.class);
-						startActivity(toHome);
-						finish();  
+						AlertDialog.Builder builder23  = new Builder(OutputShowActivity.this);
+						builder23.setTitle("返回！").setMessage("返回查询页面/返回主页面");
+						builder23.setPositiveButton("返回查询页面",new DialogInterface.OnClickListener() {  
+							@Override  
+							public void onClick(DialogInterface dialog, int which) {
+								Intent toSelect=new Intent(OutputShowActivity.this, OutputSelectActivity.class);
+								startActivity(toSelect);
+								finish();
+							}  
+						});
+						builder23.setNegativeButton("返回主页面",new DialogInterface.OnClickListener() {  
+							@Override  
+							public void onClick(DialogInterface dialog, int which) {
+								Intent toHome=new Intent(OutputShowActivity.this, MainActivity.class);
+								startActivity(toHome);
+								finish();  
+							}  
+						});
+						builder23.setCancelable(false);
+						builder23.show();   
 					}
 				});
 				builder12.setNegativeButton("否",new DialogInterface.OnClickListener() {  

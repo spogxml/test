@@ -19,12 +19,12 @@ public class MyDataDB {
 	private MyData mData=new MyData();
 	private List<Map<String,String>> arr_list;
 	
-	//´´½¨Êı¾İ¿â£¬Èç¹û´æÔÚÔò´ò¿ª
+	//åˆ›å»ºæ•°æ®åº“ï¼Œå¦‚æœå­˜åœ¨åˆ™æ‰“å¼€
 	public void initDB(Context context){
 		helper = new MDHelper(context, DB_Name, null, 1);
 		pwdb=helper.getWritableDatabase();
 	}
-	//²åÈëÊı¾İ
+	//æ’å…¥æ•°æ®
 	public int insertDB(Context context,MyData data){
 		cv = new ContentValues();
 		cv.put("title", data.title);
@@ -35,18 +35,18 @@ public class MyDataDB {
 		cv.clear();
 		pwdb.close();
 		if (res == -1) {  
-			//Ìí¼ÓÊ§°Ü  
+			//æ·»åŠ å¤±è´¥  
 			return 0;
 		} else {  
-			//Ìí¼Ó³É¹¦ 
+			//æ·»åŠ æˆåŠŸ 
 			return 1;
 		}
 	}
 	
-	//²éÑ¯Êı¾İ
+	//æŸ¥è¯¢æ•°æ®
 	public List<Map<String,String>> queryDB(String st){
 		arr_list= new ArrayList<Map<String,String>>();
-		//Èç¹ûÎª¿ÕÔò²éÑ¯È«²¿Êı¾İ
+		//å¦‚æœä¸ºç©ºåˆ™æŸ¥è¯¢å…¨éƒ¨æ•°æ®
 		if(("".equals(st))||st==null){
 			Cursor c;
 			c=pwdb.query("pwtb", null, "_id>?", new String[]{"0"}, null, null, null);
@@ -68,7 +68,7 @@ public class MyDataDB {
 				return arr_list=null;
 			}
 			pwdb.close();
-		}//²»Îª¿ÕÔò²éÑ¯ÌØ¶¨Êı¾İ
+		}//ä¸ä¸ºç©ºåˆ™æŸ¥è¯¢ç‰¹å®šæ•°æ®
 		else {
 			Cursor c;
 			c=pwdb.query("pwtb", null, "title Like ?", new String[]{"%"+st+"%"}, null, null, null);
@@ -96,37 +96,37 @@ public class MyDataDB {
 		return arr_list;
 	}
 
-	//ĞŞ¸ÄÊı¾İ
+	//ä¿®æ”¹æ•°æ®
 	public int updateDB(MyData udata,String st){
 		cv=new ContentValues();
 		cv.put("title", udata.title);
 		cv.put("user", udata.user);
 		cv.put("password", udata.password);
 		cv.put("note", udata.note);
-		//¸üĞÂÊı¾İ
+		//æ›´æ–°æ•°æ®
 		int res=pwdb.update("pwtb", cv, "title=?", new String[]{st});
 		cv.clear();
 		pwdb.close();
 		if (res == -1) {  
-			//¸üĞÂÊ§°Ü  
+			//æ›´æ–°å¤±è´¥  
 			return 0;
 		} else {  
-			//¸üĞÂ³É¹¦ 
+			//æ›´æ–°æˆåŠŸ 
 			return 1;
 		}
 			
 	}
 	
-	//É¾³ıÊı¾İ
+	//åˆ é™¤æ•°æ®
 	public int deleteDB(String st){
 		
 		int res=pwdb.delete("pwtb", "title=?", new String[]{st});
 		pwdb.close();
 		if(res==0){
-			//É¾³ıÊ§°Ü
+			//åˆ é™¤å¤±è´¥
 			return 0;
 		}else{
-			//É¾³ı³É¹¦
+			//åˆ é™¤æˆåŠŸ
 			return 1;
 		}
 	}

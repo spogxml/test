@@ -82,6 +82,20 @@ public class OutputSelectActivity extends Activity {
 						//视图加载适配器
 						lv_result.setAdapter(simp_adapter);
 						lv_result.setVisibility(View.VISIBLE);
+						//查询出结果时弹出确认框
+						AlertDialog.Builder builder20  = new Builder(OutputSelectActivity.this);
+						builder20.setTitle("提示！").setMessage("查询成功！");
+						builder20.setPositiveButton("确认",new DialogInterface.OnClickListener()
+						{
+
+							@Override
+							public   void  onClick(DialogInterface dialog,  int  which)
+							{
+								dialog.dismiss();
+							}
+						});
+						builder20.setCancelable(false);
+						builder20.show();
 						//实现点击视图单项事件
 						lv_result.setOnItemClickListener(new OnItemClickListener() {
 
@@ -131,6 +145,20 @@ public class OutputSelectActivity extends Activity {
 						//视图加载适配器
 						lv_result.setAdapter(simp_adapter);
 						lv_result.setVisibility(View.VISIBLE);
+						//查询出结果时弹出确认框
+						AlertDialog.Builder builder21  = new Builder(OutputSelectActivity.this);
+						builder21.setTitle("提示！").setMessage("查询成功！");
+						builder21.setPositiveButton("确认",new DialogInterface.OnClickListener()
+						{
+
+							@Override
+							public   void  onClick(DialogInterface dialog,  int  which)
+							{
+								dialog.dismiss();
+							}
+						});
+						builder21.setCancelable(false);
+						builder21.show();
 						//实现点击视图单项事件
 						lv_result.setOnItemClickListener(new OnItemClickListener() {
 
