@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class OutputShowActivity extends Activity {
-	//³õÊ¼»¯¿Ø¼ş
+	//åˆå§‹åŒ–æ§ä»¶
 	private EditText et_ot_title;
 	private EditText et_ot_user;
 	private EditText et_ot_password;
@@ -23,9 +23,9 @@ public class OutputShowActivity extends Activity {
 	private Button delete;
 	private Button ot_sh_cancel;
 
-	//´æ·ÅÊı¾İµÄÖĞ½é
+	//å­˜æ”¾æ•°æ®çš„ä¸­ä»‹
 	private MyData ot_shdata;
-	//Êı¾İ¿âÀà
+	//æ•°æ®åº“ç±»
 	private MyDataDB ot_shDB;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,28 +39,28 @@ public class OutputShowActivity extends Activity {
 		delete=(Button) findViewById(R.id.delete);
 		ot_sh_cancel=(Button) findViewById(R.id.ot_sh_cancel);
 
-		//½ÓÊÕÊı¾İ
+		//æ¥æ”¶æ•°æ®
 		ot_shdata=new MyData();
 		ot_shdata=this.AcceptIntent();
 
-		//ÉèÖÃÊı¾İÏÔÊ¾
+		//è®¾ç½®æ•°æ®æ˜¾ç¤º
 		et_ot_title.setText(ot_shdata.title);
 		et_ot_user.setText(ot_shdata.user);
 		et_ot_password.setText(ot_shdata.password);
 		et_ot_note.setText(ot_shdata.note);
 
-		//ĞŞ¸ÄÊı¾İ
+		//ä¿®æ”¹æ•°æ®
 		update.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				//Èç¹ûÓĞÊäÈë¿òÎª¿Õ£¬Ôò¸üĞÂÊ§°Ü
+				//å¦‚æœæœ‰è¾“å…¥æ¡†ä¸ºç©ºï¼Œåˆ™æ›´æ–°å¤±è´¥
 				if(TextUtils.isEmpty(et_ot_title.getText())||TextUtils.isEmpty(et_ot_user.getText())
 						||TextUtils.isEmpty(et_ot_password.getText())||TextUtils.isEmpty(et_ot_note.getText())){
 					AlertDialog.Builder builder6  = new Builder(OutputShowActivity.this);
-					builder6.setTitle("ÌáÊ¾£¡" ) ;
-					builder6.setMessage("ÇëÈ·ÈÏËùÓĞÊäÈëÊı¾İ²»ÄÜÎª¿Õ£¡" ) ;
-					builder6.setPositiveButton("È·ÈÏ" ,new DialogInterface.OnClickListener()
+					builder6.setTitle("æç¤ºï¼" ) ;
+					builder6.setMessage("è¯·ç¡®è®¤æ‰€æœ‰è¾“å…¥æ•°æ®ä¸èƒ½ä¸ºç©ºï¼" ) ;
+					builder6.setPositiveButton("ç¡®è®¤" ,new DialogInterface.OnClickListener()
 					{
 
 						@Override
@@ -71,26 +71,26 @@ public class OutputShowActivity extends Activity {
 					});
 					builder6.setCancelable(false);
 					builder6.show(); 
-				}//ÊäÈë¿ò¶¼ÓĞÊı¾İÔò½øĞĞ¸üĞÂ
+				}//è¾“å…¥æ¡†éƒ½æœ‰æ•°æ®åˆ™è¿›è¡Œæ›´æ–°
 				else{
-					//»ñÈ¡Ô­À´µÄ±êÌâĞÅÏ¢ÓÃÀ´Æ¥ÅäĞŞ¸Ä
+					//è·å–åŸæ¥çš„æ ‡é¢˜ä¿¡æ¯ç”¨æ¥åŒ¹é…ä¿®æ”¹
 					String title=ot_shdata.title;
-					//´æ·ÅEditTextĞŞ¸ÄºóµÄÄÚÈİ
+					//å­˜æ”¾EditTextä¿®æ”¹åçš„å†…å®¹
 					MyData tdata=new MyData();
 					tdata.title=et_ot_title.getText().toString();
 					tdata.user=et_ot_user.getText().toString();
 					tdata.password=et_ot_password.getText().toString();
 					tdata.note=et_ot_note.getText().toString();
-					//´ò¿ªÊı¾İ¿â£¬ĞŞ¸ÄÊı¾İ
+					//æ‰“å¼€æ•°æ®åº“ï¼Œä¿®æ”¹æ•°æ®
 					ot_shDB=new MyDataDB();
 					ot_shDB.initDB(OutputShowActivity.this);
 					int j=ot_shDB.updateDB(tdata, title);
 					if(j==0){
-						//¸üĞÂÊ§°Ü
+						//æ›´æ–°å¤±è´¥
 						AlertDialog.Builder builder7  = new Builder(OutputShowActivity.this);
-						builder7.setTitle("ÌáÊ¾£¡" ) ;
-						builder7.setMessage("¸üĞÂÊ§°Ü£¡" ) ;
-						builder7.setPositiveButton("È·ÈÏ" , new DialogInterface.OnClickListener() {  
+						builder7.setTitle("æç¤ºï¼" ) ;
+						builder7.setMessage("æ›´æ–°å¤±è´¥ï¼" ) ;
+						builder7.setPositiveButton("ç¡®è®¤" , new DialogInterface.OnClickListener() {  
 							@Override  
 							public void onClick(DialogInterface dialog, int which) {
 								Intent toHome=new Intent(OutputShowActivity.this, MainActivity.class);
@@ -101,21 +101,21 @@ public class OutputShowActivity extends Activity {
 						builder7.setCancelable(false);
 						builder7.show();
 					}else{
-						//¸üĞÂ³É¹¦
+						//æ›´æ–°æˆåŠŸ
 						AlertDialog.Builder builder8  = new Builder(OutputShowActivity.this);
-						builder8.setTitle("ĞŞ¸Ä³É¹¦£¡").setMessage("Êı¾İĞŞ¸Ä³É¹¦£¡");
-						builder8.setPositiveButton("ÖØĞÂĞŞ¸Ä",new DialogInterface.OnClickListener() {  
+						builder8.setTitle("ä¿®æ”¹æˆåŠŸï¼").setMessage("æ•°æ®ä¿®æ”¹æˆåŠŸï¼");
+						builder8.setPositiveButton("é‡æ–°ä¿®æ”¹",new DialogInterface.OnClickListener() {  
 							@Override  
 							public void onClick(DialogInterface dialog, int which) {
 								dialog.dismiss();
 							}  
 						});
-						builder8.setNegativeButton("·µ»Ø",new DialogInterface.OnClickListener() {  
+						builder8.setNegativeButton("è¿”å›",new DialogInterface.OnClickListener() {  
 							@Override  
 							public void onClick(DialogInterface dialog, int which) {
 								AlertDialog.Builder builder24  = new Builder(OutputShowActivity.this);
-								builder24.setTitle("·µ»Ø£¡").setMessage("·µ»Ø²éÑ¯Ò³Ãæ/·µ»ØÖ÷Ò³Ãæ");
-								builder24.setPositiveButton("·µ»Ø²éÑ¯Ò³Ãæ",new DialogInterface.OnClickListener() {  
+								builder24.setTitle("è¿”å›ï¼").setMessage("è¿”å›æŸ¥è¯¢é¡µé¢/è¿”å›ä¸»é¡µé¢");
+								builder24.setPositiveButton("è¿”å›æŸ¥è¯¢é¡µé¢",new DialogInterface.OnClickListener() {  
 									@Override  
 									public void onClick(DialogInterface dialog, int which) {
 										Intent toSelect=new Intent(OutputShowActivity.this, OutputSelectActivity.class);
@@ -123,7 +123,7 @@ public class OutputShowActivity extends Activity {
 										finish();
 									}  
 								});
-								builder24.setNegativeButton("·µ»ØÖ÷Ò³Ãæ",new DialogInterface.OnClickListener() {  
+								builder24.setNegativeButton("è¿”å›ä¸»é¡µé¢",new DialogInterface.OnClickListener() {  
 									@Override  
 									public void onClick(DialogInterface dialog, int which) {
 										Intent toHome=new Intent(OutputShowActivity.this, MainActivity.class);
@@ -143,29 +143,29 @@ public class OutputShowActivity extends Activity {
 
 		});
 
-		//É¾³ıÊı¾İ
+		//åˆ é™¤æ•°æ®
 		delete.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				
 				AlertDialog.Builder builder13  = new Builder(OutputShowActivity.this);
-				builder13.setTitle("¾¯¸æ£¡").setMessage("ÊÇ·ñÈ·ÈÏÉ¾³ıÕâÌõÊı¾İ£¬É¾³ıºó²»¿É»Ö¸´£¡");
-				builder13.setPositiveButton("È·ÈÏÉ¾³ı",new DialogInterface.OnClickListener() {  
+				builder13.setTitle("è­¦å‘Šï¼").setMessage("æ˜¯å¦ç¡®è®¤åˆ é™¤è¿™æ¡æ•°æ®ï¼Œåˆ é™¤åä¸å¯æ¢å¤ï¼");
+				builder13.setPositiveButton("ç¡®è®¤åˆ é™¤",new DialogInterface.OnClickListener() {  
 					@Override  
 					public void onClick(DialogInterface dialog, int which) {
-						//»ñÈ¡Ô­À´µÄ±êÌâÄÚÈİ£¬ÓÃÀ´Æ¥ÅäÉ¾³ı
+						//è·å–åŸæ¥çš„æ ‡é¢˜å†…å®¹ï¼Œç”¨æ¥åŒ¹é…åˆ é™¤
 						String title=ot_shdata.title;
-						//´ò¿ªÊı¾İ¿â£¬É¾³ıÊı¾İ
+						//æ‰“å¼€æ•°æ®åº“ï¼Œåˆ é™¤æ•°æ®
 						ot_shDB=new MyDataDB();
 						ot_shDB.initDB(OutputShowActivity.this);
 						int k=ot_shDB.deleteDB(title);
-						//É¾³ıÊ§°Ü
+						//åˆ é™¤å¤±è´¥
 						if(k==0){
-							//µ¯³öÉ¾³ıÌáÊ¾¿ò
+							//å¼¹å‡ºåˆ é™¤æç¤ºæ¡†
 							AlertDialog.Builder builder14  = new Builder(OutputShowActivity.this);
-							builder14.setTitle("ÌáÊ¾£¡").setMessage("É¾³ıÊ§°Ü£¡");
-							builder14.setPositiveButton("È·ÈÏ",new DialogInterface.OnClickListener() {  
+							builder14.setTitle("æç¤ºï¼").setMessage("åˆ é™¤å¤±è´¥ï¼");
+							builder14.setPositiveButton("ç¡®è®¤",new DialogInterface.OnClickListener() {  
 								@Override  
 								public void onClick(DialogInterface dialog, int which) {
 									Intent toHome=new Intent(OutputShowActivity.this, MainActivity.class);
@@ -175,12 +175,12 @@ public class OutputShowActivity extends Activity {
 							});
 							builder14.setCancelable(false);
 							builder14.show();
-						}//É¾³ı³É¹¦
+						}//åˆ é™¤æˆåŠŸ
 						else{
-							//µ¯³öÉ¾³ıÌáÊ¾¿ò
+							//å¼¹å‡ºåˆ é™¤æç¤ºæ¡†
 							AlertDialog.Builder builder15  = new Builder(OutputShowActivity.this);
-							builder15.setTitle("ÌáÊ¾£¡").setMessage("É¾³ı³É¹¦£¡");
-							builder15.setPositiveButton("È·ÈÏ",new DialogInterface.OnClickListener() {  
+							builder15.setTitle("æç¤ºï¼").setMessage("åˆ é™¤æˆåŠŸï¼");
+							builder15.setPositiveButton("ç¡®è®¤",new DialogInterface.OnClickListener() {  
 								@Override  
 								public void onClick(DialogInterface dialog, int which) {
 									Intent toHome=new Intent(OutputShowActivity.this, MainActivity.class);
@@ -193,7 +193,7 @@ public class OutputShowActivity extends Activity {
 						}
 					}
 				});
-				builder13.setNegativeButton("²»É¾³ı",new DialogInterface.OnClickListener() {  
+				builder13.setNegativeButton("ä¸åˆ é™¤",new DialogInterface.OnClickListener() {  
 					@Override  
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
@@ -206,22 +206,22 @@ public class OutputShowActivity extends Activity {
 		});
 		
 		
-		//È¡Ïû
+		//å–æ¶ˆ
 		ot_sh_cancel.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				AlertDialog.Builder builder11  = new Builder(OutputShowActivity.this);
-				builder11.setTitle("ÌáÊ¾£¡").setMessage("ÊÇ·ñÈ·ÈÏ·µ»Ø!");
-				builder11.setPositiveButton("ÊÇ",new DialogInterface.OnClickListener()
+				builder11.setTitle("æç¤ºï¼").setMessage("æ˜¯å¦ç¡®è®¤è¿”å›!");
+				builder11.setPositiveButton("æ˜¯",new DialogInterface.OnClickListener()
 				{
 
 					@Override
 					public   void  onClick(DialogInterface dialog,  int  which)
 					{
 						AlertDialog.Builder builder22  = new Builder(OutputShowActivity.this);
-						builder22.setTitle("·µ»Ø£¡").setMessage("·µ»Ø²éÑ¯Ò³Ãæ/·µ»ØÖ÷Ò³Ãæ");
-						builder22.setPositiveButton("·µ»Ø²éÑ¯Ò³Ãæ",new DialogInterface.OnClickListener() {  
+						builder22.setTitle("è¿”å›ï¼").setMessage("è¿”å›æŸ¥è¯¢é¡µé¢/è¿”å›ä¸»é¡µé¢");
+						builder22.setPositiveButton("è¿”å›æŸ¥è¯¢é¡µé¢",new DialogInterface.OnClickListener() {  
 							@Override  
 							public void onClick(DialogInterface dialog, int which) {
 								Intent toSelect=new Intent(OutputShowActivity.this, OutputSelectActivity.class);
@@ -229,7 +229,7 @@ public class OutputShowActivity extends Activity {
 								finish();
 							}  
 						});
-						builder22.setNegativeButton("·µ»ØÖ÷Ò³Ãæ",new DialogInterface.OnClickListener() {  
+						builder22.setNegativeButton("è¿”å›ä¸»é¡µé¢",new DialogInterface.OnClickListener() {  
 							@Override  
 							public void onClick(DialogInterface dialog, int which) {
 								Intent toHome=new Intent(OutputShowActivity.this, MainActivity.class);
@@ -241,7 +241,7 @@ public class OutputShowActivity extends Activity {
 						builder22.show(); 
 					}
 				});
-				builder11.setNegativeButton("·ñ",new DialogInterface.OnClickListener() {  
+				builder11.setNegativeButton("å¦",new DialogInterface.OnClickListener() {  
 					@Override  
 					public void onClick(DialogInterface dialog, int which) {
 						
@@ -255,32 +255,32 @@ public class OutputShowActivity extends Activity {
 		
 	}
 	
-	//½ÓÊÕListViewµ¥Ïîitemµã»÷Ê±´«À´µÄÊı¾İ
+	//æ¥æ”¶ListViewå•é¡¹itemç‚¹å‡»æ—¶ä¼ æ¥çš„æ•°æ®
 	public MyData AcceptIntent() {
 		MyData mdata=new MyData();
-		Intent intent_accept = getIntent();           //´´½¨Ò»¸ö½ÓÊÕÒâÍ¼
-		Bundle bundle = intent_accept.getExtras();    //´´½¨Bundle¶ÔÏó£¬ÓÃÓÚ½ÓÊÕOutputSelectµÄIntentÊı¾İ
-		mdata.title = bundle.getString("title");       //»ñÈ¡IntentµÄÄÚÈİ
-		mdata.user = bundle.getString("user");       //»ñÈ¡IntentµÄÄÚÈİ
-		mdata.password = bundle.getString("password");       //»ñÈ¡IntentµÄÄÚÈİ
-		mdata.note = bundle.getString("note");       //»ñÈ¡IntentµÄÄÚÈİ
+		Intent intent_accept = getIntent();           //åˆ›å»ºä¸€ä¸ªæ¥æ”¶æ„å›¾
+		Bundle bundle = intent_accept.getExtras();    //åˆ›å»ºBundleå¯¹è±¡ï¼Œç”¨äºæ¥æ”¶OutputSelectçš„Intentæ•°æ®
+		mdata.title = bundle.getString("title");       //è·å–Intentçš„å†…å®¹
+		mdata.user = bundle.getString("user");       //è·å–Intentçš„å†…å®¹
+		mdata.password = bundle.getString("password");       //è·å–Intentçš„å†…å®¹
+		mdata.note = bundle.getString("note");       //è·å–Intentçš„å†…å®¹
 		return mdata;          
 	}
 
-	//×Ô¶¨Òå·µ»Ø¼ü¹¦ÄÜ£¬ºÍÈ¡Ïû¼üÒ»Ñù
+	//è‡ªå®šä¹‰è¿”å›é”®åŠŸèƒ½ï¼Œå’Œå–æ¶ˆé”®ä¸€æ ·
 		public boolean onKeyDown(int keyCode, KeyEvent event) {
 			if (keyCode == KeyEvent.KEYCODE_BACK) {
 				AlertDialog.Builder builder12  = new Builder(OutputShowActivity.this);
-				builder12.setTitle("ÌáÊ¾£¡").setMessage("ÊÇ·ñÈ·ÈÏ·µ»Ø!");
-				builder12.setPositiveButton("ÊÇ",new DialogInterface.OnClickListener()
+				builder12.setTitle("æç¤ºï¼").setMessage("æ˜¯å¦ç¡®è®¤è¿”å›!");
+				builder12.setPositiveButton("æ˜¯",new DialogInterface.OnClickListener()
 				{
 
 					@Override
 					public   void  onClick(DialogInterface dialog,  int  which)
 					{
 						AlertDialog.Builder builder23  = new Builder(OutputShowActivity.this);
-						builder23.setTitle("·µ»Ø£¡").setMessage("·µ»Ø²éÑ¯Ò³Ãæ/·µ»ØÖ÷Ò³Ãæ");
-						builder23.setPositiveButton("·µ»Ø²éÑ¯Ò³Ãæ",new DialogInterface.OnClickListener() {  
+						builder23.setTitle("è¿”å›ï¼").setMessage("è¿”å›æŸ¥è¯¢é¡µé¢/è¿”å›ä¸»é¡µé¢");
+						builder23.setPositiveButton("è¿”å›æŸ¥è¯¢é¡µé¢",new DialogInterface.OnClickListener() {  
 							@Override  
 							public void onClick(DialogInterface dialog, int which) {
 								Intent toSelect=new Intent(OutputShowActivity.this, OutputSelectActivity.class);
@@ -288,7 +288,7 @@ public class OutputShowActivity extends Activity {
 								finish();
 							}  
 						});
-						builder23.setNegativeButton("·µ»ØÖ÷Ò³Ãæ",new DialogInterface.OnClickListener() {  
+						builder23.setNegativeButton("è¿”å›ä¸»é¡µé¢",new DialogInterface.OnClickListener() {  
 							@Override  
 							public void onClick(DialogInterface dialog, int which) {
 								Intent toHome=new Intent(OutputShowActivity.this, MainActivity.class);
@@ -300,7 +300,7 @@ public class OutputShowActivity extends Activity {
 						builder23.show();   
 					}
 				});
-				builder12.setNegativeButton("·ñ",new DialogInterface.OnClickListener() {  
+				builder12.setNegativeButton("å¦",new DialogInterface.OnClickListener() {  
 					@Override  
 					public void onClick(DialogInterface dialog, int which) {
 						

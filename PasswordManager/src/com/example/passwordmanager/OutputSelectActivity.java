@@ -25,19 +25,19 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 public class OutputSelectActivity extends Activity {
-	//³õÊ¼»¯¿Ø¼ş
+	//åˆå§‹åŒ–æ§ä»¶
 	private EditText et_select;
 	private ListView lv_result;
 	private Button ot_confirm;
 	private Button ot_cancel;
 
-	//´æ·ÅÊı¾İµÄÖĞ½é
+	//å­˜æ”¾æ•°æ®çš„ä¸­ä»‹
 	private MyData ot_data;
-	//Êı¾İ¿âÀà
+	//æ•°æ®åº“ç±»
 	private MyDataDB otDB;
-	//´´½¨Ò»¸ö¼òµ¥ÊÊÅäÆ÷
+	//åˆ›å»ºä¸€ä¸ªç®€å•é€‚é…å™¨
 	private SimpleAdapter simp_adapter;
-	//´´½¨Ò»¸ö¼¯ºÏÁĞ±í
+	//åˆ›å»ºä¸€ä¸ªé›†åˆåˆ—è¡¨
 	private List<Map<String,String>> arr_outlist;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,23 +48,23 @@ public class OutputSelectActivity extends Activity {
 		ot_confirm=(Button) findViewById(R.id.ot_confirm);
 		ot_cancel=(Button) findViewById(R.id.ot_cancel);
 
-		//È·ÈÏ°´Å¥
+		//ç¡®è®¤æŒ‰é’®
 		ot_confirm.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				arr_outlist= new ArrayList<Map<String,String>>();
-				//Èç¹û²éÑ¯¿òÎª¿Õ£¬ÔòÏÔÊ¾ËùÓĞÊı¾İ
+				//å¦‚æœæŸ¥è¯¢æ¡†ä¸ºç©ºï¼Œåˆ™æ˜¾ç¤ºæ‰€æœ‰æ•°æ®
 				if(TextUtils.isEmpty(et_select.getText())){
-					//´ò¿ªÊı¾İ¿â£¬²éÑ¯³öÊı¾İ·Åµ½¼¯ºÏÁĞ±íµ±ÖĞ
+					//æ‰“å¼€æ•°æ®åº“ï¼ŒæŸ¥è¯¢å‡ºæ•°æ®æ”¾åˆ°é›†åˆåˆ—è¡¨å½“ä¸­
 					otDB=new MyDataDB();
 					otDB.initDB(OutputSelectActivity.this);
 					arr_outlist=otDB.queryDB(et_select.getText().toString());
-					//Èç¹ûÃ»ÓĞ´æ´¢¹ıÊı¾İ
+					//å¦‚æœæ²¡æœ‰å­˜å‚¨è¿‡æ•°æ®
 					if(arr_outlist==null){
 						AlertDialog.Builder builder17  = new Builder(OutputSelectActivity.this);
-						builder17.setTitle("ÌáÊ¾£¡").setMessage("Äú»¹Ã»ÓĞ´æÈë¹ıÊı¾İ");
-						builder17.setPositiveButton("È·ÈÏ",new DialogInterface.OnClickListener()
+						builder17.setTitle("æç¤ºï¼").setMessage("æ‚¨è¿˜æ²¡æœ‰å­˜å…¥è¿‡æ•°æ®");
+						builder17.setPositiveButton("ç¡®è®¤",new DialogInterface.OnClickListener()
 						{
 
 							@Override
@@ -76,16 +76,16 @@ public class OutputSelectActivity extends Activity {
 						builder17.setCancelable(false);
 						builder17.show();
 					}else {
-						//ÊÊÅäÆ÷¼ÓÔØÊı¾İÔ´
+						//é€‚é…å™¨åŠ è½½æ•°æ®æº
 						simp_adapter=new SimpleAdapter(OutputSelectActivity.this, arr_outlist, R.layout.item,
 								new String[]{"title","note"}, new int[]{R.id.it_title,R.id.it_note});
-						//ÊÓÍ¼¼ÓÔØÊÊÅäÆ÷
+						//è§†å›¾åŠ è½½é€‚é…å™¨
 						lv_result.setAdapter(simp_adapter);
 						lv_result.setVisibility(View.VISIBLE);
-						//²éÑ¯³ö½á¹ûÊ±µ¯³öÈ·ÈÏ¿ò
+						//æŸ¥è¯¢å‡ºç»“æœæ—¶å¼¹å‡ºç¡®è®¤æ¡†
 						AlertDialog.Builder builder20  = new Builder(OutputSelectActivity.this);
-						builder20.setTitle("ÌáÊ¾£¡").setMessage("²éÑ¯³É¹¦£¡");
-						builder20.setPositiveButton("È·ÈÏ",new DialogInterface.OnClickListener()
+						builder20.setTitle("æç¤ºï¼").setMessage("æŸ¥è¯¢æˆåŠŸï¼");
+						builder20.setPositiveButton("ç¡®è®¤",new DialogInterface.OnClickListener()
 						{
 
 							@Override
@@ -96,7 +96,7 @@ public class OutputSelectActivity extends Activity {
 						});
 						builder20.setCancelable(false);
 						builder20.show();
-						//ÊµÏÖµã»÷ÊÓÍ¼µ¥ÏîÊÂ¼ş
+						//å®ç°ç‚¹å‡»è§†å›¾å•é¡¹äº‹ä»¶
 						lv_result.setOnItemClickListener(new OnItemClickListener() {
 
 							@Override
@@ -116,18 +116,18 @@ public class OutputSelectActivity extends Activity {
 							}
 						});
 					}
-				}//Èç¹û²éÑ¯¿ò²»Îª¿Õ£¬ÔòÏÔÊ¾Æ¥Åäµ½µÄÊı¾İ
+				}//å¦‚æœæŸ¥è¯¢æ¡†ä¸ä¸ºç©ºï¼Œåˆ™æ˜¾ç¤ºåŒ¹é…åˆ°çš„æ•°æ®
 				else {
 
-					//´ò¿ªÊı¾İ¿â£¬²éÑ¯³öÊı¾İ·Åµ½¼¯ºÏÁĞ±íµ±ÖĞ
+					//æ‰“å¼€æ•°æ®åº“ï¼ŒæŸ¥è¯¢å‡ºæ•°æ®æ”¾åˆ°é›†åˆåˆ—è¡¨å½“ä¸­
 					otDB=new MyDataDB();
 					otDB.initDB(OutputSelectActivity.this);
 					arr_outlist=otDB.queryDB(et_select.getText().toString());
-					//Èç¹ûÃ»ÓĞ²éÑ¯µ½Êı¾İ
+					//å¦‚æœæ²¡æœ‰æŸ¥è¯¢åˆ°æ•°æ®
 					if(arr_outlist==null){
 						AlertDialog.Builder builder18  = new Builder(OutputSelectActivity.this);
-						builder18.setTitle("ÌáÊ¾£¡").setMessage("Ã»ÓĞ²éÑ¯µ½µ±Ç°Êı¾İ£¬ÇëÈ·ÈÏÊäÈëĞÅÏ¢");
-						builder18.setPositiveButton("È·ÈÏ",new DialogInterface.OnClickListener()
+						builder18.setTitle("æç¤ºï¼").setMessage("æ²¡æœ‰æŸ¥è¯¢åˆ°å½“å‰æ•°æ®ï¼Œè¯·ç¡®è®¤è¾“å…¥ä¿¡æ¯");
+						builder18.setPositiveButton("ç¡®è®¤",new DialogInterface.OnClickListener()
 						{
 
 							@Override
@@ -139,16 +139,16 @@ public class OutputSelectActivity extends Activity {
 						builder18.setCancelable(false);
 						builder18.show();
 					}else {
-						//ÊÊÅäÆ÷¼ÓÔØÊı¾İÔ´
+						//é€‚é…å™¨åŠ è½½æ•°æ®æº
 						simp_adapter=new SimpleAdapter(OutputSelectActivity.this, arr_outlist, R.layout.item,
 								new String[]{"title","note"}, new int[]{R.id.it_title,R.id.it_note});
-						//ÊÓÍ¼¼ÓÔØÊÊÅäÆ÷
+						//è§†å›¾åŠ è½½é€‚é…å™¨
 						lv_result.setAdapter(simp_adapter);
 						lv_result.setVisibility(View.VISIBLE);
-						//²éÑ¯³ö½á¹ûÊ±µ¯³öÈ·ÈÏ¿ò
+						//æŸ¥è¯¢å‡ºç»“æœæ—¶å¼¹å‡ºç¡®è®¤æ¡†
 						AlertDialog.Builder builder21  = new Builder(OutputSelectActivity.this);
-						builder21.setTitle("ÌáÊ¾£¡").setMessage("²éÑ¯³É¹¦£¡");
-						builder21.setPositiveButton("È·ÈÏ",new DialogInterface.OnClickListener()
+						builder21.setTitle("æç¤ºï¼").setMessage("æŸ¥è¯¢æˆåŠŸï¼");
+						builder21.setPositiveButton("ç¡®è®¤",new DialogInterface.OnClickListener()
 						{
 
 							@Override
@@ -159,7 +159,7 @@ public class OutputSelectActivity extends Activity {
 						});
 						builder21.setCancelable(false);
 						builder21.show();
-						//ÊµÏÖµã»÷ÊÓÍ¼µ¥ÏîÊÂ¼ş
+						//å®ç°ç‚¹å‡»è§†å›¾å•é¡¹äº‹ä»¶
 						lv_result.setOnItemClickListener(new OnItemClickListener() {
 
 							@Override
@@ -183,14 +183,14 @@ public class OutputSelectActivity extends Activity {
 
 			}
 		});
-		//È¡Ïû°´Å¥
+		//å–æ¶ˆæŒ‰é’®
 		ot_cancel.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				AlertDialog.Builder builder9  = new Builder(OutputSelectActivity.this);
-				builder9.setTitle("ÌáÊ¾£¡").setMessage("ÊÇ·ñÈ·ÈÏ·µ»ØÖ÷Ò³Ãæ!");
-				builder9.setPositiveButton("ÊÇ",new DialogInterface.OnClickListener()
+				builder9.setTitle("æç¤ºï¼").setMessage("æ˜¯å¦ç¡®è®¤è¿”å›ä¸»é¡µé¢!");
+				builder9.setPositiveButton("æ˜¯",new DialogInterface.OnClickListener()
 				{
 
 					@Override
@@ -201,7 +201,7 @@ public class OutputSelectActivity extends Activity {
 						finish();  
 					}
 				});
-				builder9.setNegativeButton("·ñ",new DialogInterface.OnClickListener() {  
+				builder9.setNegativeButton("å¦",new DialogInterface.OnClickListener() {  
 					@Override  
 					public void onClick(DialogInterface dialog, int which) {
 
@@ -213,12 +213,12 @@ public class OutputSelectActivity extends Activity {
 			}
 		});
 	}
-	//×Ô¶¨Òå·µ»Ø¼ü¹¦ÄÜ£¬ºÍÈ¡Ïû¼üÒ»Ñù
+	//è‡ªå®šä¹‰è¿”å›é”®åŠŸèƒ½ï¼Œå’Œå–æ¶ˆé”®ä¸€æ ·
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			AlertDialog.Builder builder10  = new Builder(OutputSelectActivity.this);
-			builder10.setTitle("ÌáÊ¾£¡").setMessage("ÊÇ·ñÈ·ÈÏ·µ»ØÖ÷Ò³Ãæ!");
-			builder10.setPositiveButton("ÊÇ",new DialogInterface.OnClickListener()
+			builder10.setTitle("æç¤ºï¼").setMessage("æ˜¯å¦ç¡®è®¤è¿”å›ä¸»é¡µé¢!");
+			builder10.setPositiveButton("æ˜¯",new DialogInterface.OnClickListener()
 			{
 
 				@Override
@@ -229,7 +229,7 @@ public class OutputSelectActivity extends Activity {
 					finish();  
 				}
 			});
-			builder10.setNegativeButton("·ñ",new DialogInterface.OnClickListener() {  
+			builder10.setNegativeButton("å¦",new DialogInterface.OnClickListener() {  
 				@Override  
 				public void onClick(DialogInterface dialog, int which) {
 
