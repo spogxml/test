@@ -16,7 +16,7 @@ public class MDHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL("create table if not exists pwtb(_id integer primary key autoincrement,title text not null,user text not null,password text not null,note text not null)");
-		
+		db.execSQL("create table if not exists ustb(_id integer primary key autoincrement,lgpassword text,itpassword text)");
 	}
 
 	@Override

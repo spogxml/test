@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.codec.binary.Base64;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -26,15 +28,38 @@ public class MyDataDB {
 	}
 	//插入数据
 	public int insertDB(Context context,MyData data){
+		long res1;
+		long res2;
+		long res3;
 		cv = new ContentValues();
-		cv.put("title", data.title);
-		cv.put("user", data.user);
-		cv.put("password",data.password);
-		cv.put("note", data.note);
-		long res=pwdb.insert("pwtb", null, cv);
-		cv.clear();
+		if(data.title!=null){
+			cv.put("title", data.title);
+			cv.put("user", data.user);
+			cv.put("password",data.password);
+			cv.put("note", data.note);
+			res1=pwdb.insert("pwtb", null, cv);
+			cv.clear();
+		}else
+			res1=1;
+		//设置登陆密码
+		if(data.lgpassword!=null){
+			//将登陆密码进行编码后存储
+			String s=data.lgpassword+"xml";
+			MyDataDB md=new MyDataDB();
+			cv.put("lgpassword", md.encode(s));
+			res2=pwdb.insert("ustb", "lgpassword", cv);
+			cv.clear();
+		}else 
+			res2=1;
+		//设置加密密码
+		if(data.itpassword!=null){
+			cv.put("itpassword", data.itpassword);
+			res3=pwdb.insert("ustb", "itpassword", cv);
+			cv.clear();
+		}else
+			res3=1;
 		pwdb.close();
-		if (res == -1) {  
+		if (res1 == -1||res2==-1||res3==-1) {  
 			//添加失败  
 			return 0;
 		} else {  
@@ -130,5 +155,14 @@ public class MyDataDB {
 			return 1;
 		}
 	}
-
+	
+	
+	//编码
+	public static String encode(String es) {  
+        return new String(Base64.encodeBase64(es.getBytes()));  
+    }
+	//解码
+	public static String decode(String ds) {  
+        return new String(Base64.decodeBase64(ds));  
+    }
 }

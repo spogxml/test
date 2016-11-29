@@ -5,4 +5,6 @@ public class MyData {
 	public String user;
 	public String password;
 	public String note;
+	public String lgpassword;
+	public String itpassword;
 }

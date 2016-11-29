@@ -55,7 +55,7 @@ public class InputActivity extends Activity {
 					AlertDialog.Builder builder1  = new Builder(InputActivity.this);
 					builder1.setTitle("提示！" ) ;
 					builder1.setMessage("请确认所有输入数据不能为空！" ) ;
-					builder1.setPositiveButton("好" ,new DialogInterface.OnClickListener()
+					builder1.setPositiveButton("确认" ,new DialogInterface.OnClickListener()
 					{
 
 						@Override
@@ -107,7 +107,7 @@ public class InputActivity extends Activity {
 							AlertDialog.Builder builder2  = new Builder(InputActivity.this);
 							builder2.setTitle("提示！" ) ;
 							builder2.setMessage("添加失败！请确认空间是否足够！" ) ;
-							builder2.setPositiveButton("好" , new DialogInterface.OnClickListener() {  
+							builder2.setPositiveButton("确认" , new DialogInterface.OnClickListener() {  
 								@Override  
 								public void onClick(DialogInterface dialog, int which) {
 									Intent toHome=new Intent(InputActivity.this, MainActivity.class);
