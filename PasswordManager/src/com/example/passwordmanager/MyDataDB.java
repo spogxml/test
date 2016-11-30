@@ -155,7 +155,38 @@ public class MyDataDB {
 			return 1;
 		}
 	}
-	
+	//查询密码
+	public int queryPW(String st){
+		//如果为空
+		if("".equals(st)||st==null){
+			//查询所有数据
+			Cursor c;
+			c=pwdb.query("ustb", null, "_id>?", new String[]{"0"}, null, null, null);
+			if(c!=null&&c.getCount()!=0){
+				//存在数据则返回1
+				return 1;
+			}else{
+				//不存在数据则返回0
+				return 0;
+			}
+		}//如果不为空
+		else{
+			//将密码进行编码后匹配数据库查询
+			String s=st+"xml";
+			MyDataDB md=new MyDataDB();
+			//查询
+			Cursor c;
+			c=pwdb.query("ustb", null, "lgpassword Like ?", new String[]{md.encode(s)}, null, null, null);
+			if(c!=null&&c.getCount()!=0){
+				//查询成功
+				return 1;
+			}
+			else{
+				//查询失败
+				return 0;
+			}
+		}
+	}
 	
 	//编码
 	public static String encode(String es) {  

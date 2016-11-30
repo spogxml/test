@@ -29,7 +29,7 @@ public class SetLgPasswordActivity extends Activity{
 		set_confirm=(Button) findViewById(R.id.set_confirm);
 		set_cancel=(Button) findViewById(R.id.set_cancel);
 		
-		//确认按钮点击，设置密码
+		//确认按钮，设置密码
 		set_confirm.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -39,7 +39,7 @@ public class SetLgPasswordActivity extends Activity{
 					AlertDialog.Builder builder25  = new Builder(SetLgPasswordActivity.this);
 					builder25.setTitle("提示！" ) ;
 					builder25.setMessage("请确认密码不能为空且最少为6位！" ) ;
-					builder25.setPositiveButton("好" ,new DialogInterface.OnClickListener()
+					builder25.setPositiveButton("确认" ,new DialogInterface.OnClickListener()
 					{
 
 						@Override
@@ -113,7 +113,7 @@ public class SetLgPasswordActivity extends Activity{
 			}
 		});
 		
-		//取消按钮点击，返回主页面
+		//取消按钮，返回主页面
 		set_cancel.setOnClickListener(new OnClickListener() {
 			
 			@Override
