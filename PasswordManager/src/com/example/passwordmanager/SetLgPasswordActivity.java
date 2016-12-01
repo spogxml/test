@@ -96,7 +96,7 @@ public class SetLgPasswordActivity extends Activity{
 					//添加成功时时弹出对话框
 					else {
 						AlertDialog.Builder builder27  = new Builder(SetLgPasswordActivity.this);
-						builder27.setTitle("设置成功！").setMessage("密码设置成功！");
+						builder27.setTitle("设置成功！").setMessage("密码设置成功！下次登陆时将需要输入密码");
 						builder27.setPositiveButton("返回主页面",new DialogInterface.OnClickListener() {  
 							@Override  
 							public void onClick(DialogInterface dialog, int which) {
@@ -124,7 +124,6 @@ public class SetLgPasswordActivity extends Activity{
 					@Override  
 					public void onClick(DialogInterface dialog, int which) {
 						Intent toHome=new Intent(SetLgPasswordActivity.this, MainActivity.class);
-						startActivity(toHome);
 						finish();
 					}  
 				});

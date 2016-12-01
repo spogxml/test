@@ -5,23 +5,15 @@
     android:background="@drawable/bg"
     tools:context="com.example.passwordmanager.MainActivity" >
 
-    <RelativeLayout
-        android:id="@+id/MainRelativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg" 
-        android:visibility="gone"
-        >
-
         <TextView
             android:id="@+id/textview1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="40dp"
             android:text="密码管理器"
-            android:textSize="40dp" />
+            android:textSize="40sp" />
 
         <Button
             android:id="@+id/input"
@@ -29,10 +21,10 @@
             android:layout_height="50dp"
             android:layout_below="@+id/textview1"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/button_selector"
             android:text="输入数据"
-            android:textSize="20dp" />
+            android:textSize="@dimen/button_size" />
 
         <Button
             android:id="@+id/output"
@@ -40,106 +32,57 @@
             android:layout_height="50dp"
             android:layout_below="@+id/input"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/button_selector"
             android:text="查询数据"
-            android:textSize="20dp" />
+            android:textSize="@dimen/button_size" />
 
         <Button
             android:id="@+id/set_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/output"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="60dp"
+            android:layout_below="@+id/output"
+            android:layout_marginTop="40dp"
             android:background="@drawable/button_selector"
             android:text="设置登陆密码"
-            android:textSize="20dp"
+            android:textSize="@dimen/button_size"
             android:visibility="visible" />
 
         <Button
             android:id="@+id/amend_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/output"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="60dp"
+            android:layout_below="@+id/output"
+            android:layout_marginTop="40dp"
             android:background="@drawable/button_selector"
             android:text="修改登陆密码"
-            android:textSize="20dp"
+            android:textSize="@dimen/button_size"
             android:visibility="gone" />
 
         <Button
             android:id="@+id/set_itpassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/set_password"
-            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/output"
+            android:layout_marginTop="130dp"
             android:background="@drawable/button_selector"
             android:text="设置加密密码"
-            android:textSize="20dp"
+            android:textSize="@dimen/button_size"
             android:visibility="visible" />
 
         <Button
             android:id="@+id/amend_itpassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/set_password"
-            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/output"
+            android:layout_marginTop="130dp"
             android:background="@drawable/button_selector"
             android:text="修改加密密码"
-            android:textSize="20dp"
+            android:textSize="@dimen/button_size"
             android:visibility="gone" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/LgRelativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg"
-        android:visibility="visible" >
-
-        <TextView
-            android:id="@+id/tv_inlgpw"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:text="输入登陆密码："
-            android:textSize="25dp" />
-
-        <EditText
-            android:id="@+id/et_inlgpw"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/tv_inlgpw"
-            android:background="@drawable/et_shape"
-            android:ems="10" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/et_inlgpw" >
-
-            <Button
-                android:id="@+id/lg_confirm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/button_selector"
-                android:text="确认" />
-
-            <Button
-                android:id="@+id/lg_cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/button_selector"
-                android:text="取消" />
-        </LinearLayout>
-    </RelativeLayout>
 
 </RelativeLayout>

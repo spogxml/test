@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.passwordmanager.LoginActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
             android:label="@string/app_name" >
             <intent-filter>
@@ -23,11 +23,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.example.passwordmanager.MainActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"></activity>
         <activity android:name="com.example.passwordmanager.InputActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"></activity>
         <activity android:name="com.example.passwordmanager.OutputSelectActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"></activity>
         <activity android:name="com.example.passwordmanager.OutputShowActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"></activity>
+        <activity android:name="com.example.passwordmanager.SetLgPasswordActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"></activity>
     </application>
 

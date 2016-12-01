@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.apache.commons.codec.binary.Base64;
 
+import com.example.passwordmanager.util.EncryptUitl;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -20,6 +22,8 @@ public class MyDataDB {
 	private ContentValues cv;
 	private MyData mData=new MyData();
 	private List<Map<String,String>> arr_list;
+	private EncryptUitl etul;
+	private String defkey="123456";
 	
 	//创建数据库，如果存在则打开
 	public void initDB(Context context){
@@ -44,9 +48,8 @@ public class MyDataDB {
 		//设置登陆密码
 		if(data.lgpassword!=null){
 			//将登陆密码进行编码后存储
-			String s=data.lgpassword+"xml";
-			MyDataDB md=new MyDataDB();
-			cv.put("lgpassword", md.encode(s));
+			String s=data.lgpassword;
+			cv.put("lgpassword", etul.encode(s,defkey));
 			res2=pwdb.insert("ustb", "lgpassword", cv);
 			cv.clear();
 		}else 
@@ -172,11 +175,9 @@ public class MyDataDB {
 		}//如果不为空
 		else{
 			//将密码进行编码后匹配数据库查询
-			String s=st+"xml";
-			MyDataDB md=new MyDataDB();
 			//查询
 			Cursor c;
-			c=pwdb.query("ustb", null, "lgpassword Like ?", new String[]{md.encode(s)}, null, null, null);
+			c=pwdb.query("ustb", null, "lgpassword Like ?", new String[]{etul.encode(st,defkey)}, null, null, null);
 			if(c!=null&&c.getCount()!=0){
 				//查询成功
 				return 1;
@@ -188,12 +189,5 @@ public class MyDataDB {
 		}
 	}
 	
-	//编码
-	public static String encode(String es) {  
-        return new String(Base64.encodeBase64(es.getBytes()));  
-    }
-	//解码
-	public static String decode(String ds) {  
-        return new String(Base64.decodeBase64(ds));  
-    }
+
 }
