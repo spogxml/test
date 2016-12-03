@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
+//主页面
 public class MainActivity extends Activity {
 	//主界面控件
 	private Button input;
@@ -41,19 +42,23 @@ public class MainActivity extends Activity {
 		set_itpassword=(Button) findViewById(R.id.set_itpassword);
 		amend_itpassword=(Button) findViewById(R.id.amend_itpassword);
 
-		//启动时判断是否设置过登陆密码
+		//启动时判断是否设置过登陆密码和加密密码
 		//打开数据库
 		sdb=new MyDataDB();
 		sdb.initDB(MainActivity.this);
 		//查询数据库
-		int r=sdb.queryPW(null);
+		int r1=sdb.queryPW(null,1);
+		int r2=sdb.queryPW(null, 2);
 		//如果设置过登陆密码，则默认显示登陆页面，且主页面的设置登陆密码按钮变为修改密码按钮
-		if(r==1) {
+		if(r1==1) {
 			set_password.setVisibility(View.GONE);
-			Log.i("info", "隐藏设置按钮");
 			amend_password.setVisibility(View.VISIBLE);
-			Log.i("info", "显示修改按钮");
 
+		}
+		//如果设置过加密密码，则主页面的设置加密密码按钮变为修改密码按钮
+		if(r2==1){
+			set_itpassword.setVisibility(View.GONE);
+			amend_itpassword.setVisibility(View.VISIBLE);
 		}
 
 		//主界面
@@ -82,17 +87,22 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent slgpw_intent=new Intent(MainActivity.this, SetLgPasswordActivity.class);
+				Intent slgpw_intent=new Intent(MainActivity.this, SetPasswordActivity.class);
+				Bundle bundle=new Bundle();
+				bundle.putString("type", "lgpassword");
+				slgpw_intent.putExtras(bundle);
 				startActivity(slgpw_intent);
 				finish();
 			}
 		});
 		//修改登陆密码按钮
 		amend_password.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
-				Intent algpw_intent=new Intent(MainActivity.this, InputActivity.class);
+				Intent algpw_intent=new Intent(MainActivity.this, AmendPasswordActivity.class);
+				Bundle bundle=new Bundle();
+				bundle.putString("type", "lgpassword");
+				algpw_intent.putExtras(bundle);
 				startActivity(algpw_intent);
 				finish();
 			}
@@ -102,18 +112,24 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent inpt_intent=new Intent(MainActivity.this, InputActivity.class);
-				startActivity(inpt_intent);
+				Intent sitpw_intent=new Intent(MainActivity.this, SetPasswordActivity.class);
+				Bundle bundle=new Bundle();
+				bundle.putString("type", "itpassword");
+				sitpw_intent.putExtras(bundle);
+				startActivity(sitpw_intent);
 				finish();
 			}
 		});
-		//修改登陆密码按钮
+		//修改加密密码按钮
 		amend_itpassword.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Intent inpt_intent=new Intent(MainActivity.this, InputActivity.class);
-				startActivity(inpt_intent);
+				Intent aitpw_intent=new Intent(MainActivity.this, AmendPasswordActivity.class);
+				Bundle bundle=new Bundle();
+				bundle.putString("type", "itpassword");
+				aitpw_intent.putExtras(bundle);
+				startActivity(aitpw_intent);
 				finish();
 			}
 		});

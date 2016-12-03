@@ -471,7 +471,9 @@ public final class R {
         public static final int press_shape=0x7f020006;
     }
     public static final class id {
-        public static final int action_settings=0x7f090038;
+        public static final int action_settings=0x7f09003a;
+        public static final int amend_cancel=0x7f09000e;
+        public static final int amend_confirm=0x7f09000d;
         public static final int amend_itpassword=0x7f090006;
         public static final int amend_password=0x7f090004;
         public static final int delete=0x7f090032;
@@ -482,7 +484,7 @@ public final class R {
         public static final int et_amendpw=0x7f09000a;
         public static final int et_confirmpw=0x7f09000c;
         public static final int et_firstpw=0x7f090008;
-        public static final int et_inlgpw=0x7f09001d;
+        public static final int et_inlgpw=0x7f09001b;
         public static final int et_ot_note=0x7f09002f;
         public static final int et_ot_password=0x7f09002e;
         public static final int et_ot_title=0x7f09002c;
@@ -493,10 +495,10 @@ public final class R {
         public static final int in_cancel=0x7f090019;
         public static final int in_confirm=0x7f090018;
         public static final int input=0x7f090001;
-        public static final int it_note=0x7f09001b;
-        public static final int it_title=0x7f09001a;
-        public static final int lg_cancel=0x7f09001f;
-        public static final int lg_confirm=0x7f09001e;
+        public static final int it_note=0x7f09001f;
+        public static final int it_title=0x7f09001e;
+        public static final int lg_cancel=0x7f09001d;
+        public static final int lg_confirm=0x7f09001c;
         public static final int linearLayout1=0x7f090017;
         public static final int linearLayout2=0x7f090022;
         public static final int linearLayout3=0x7f090026;
@@ -513,8 +515,8 @@ public final class R {
         public static final int output=0x7f090002;
         public static final int password=0x7f090013;
         public static final int select=0x7f090020;
-        public static final int set_cancel=0x7f09000e;
-        public static final int set_confirm=0x7f09000d;
+        public static final int set_cancel=0x7f090039;
+        public static final int set_confirm=0x7f090038;
         public static final int set_itpassword=0x7f090005;
         public static final int set_password=0x7f090003;
         public static final int textView1=0x7f090025;
@@ -523,7 +525,7 @@ public final class R {
         public static final int tv_amendpw=0x7f090009;
         public static final int tv_cofirmpw=0x7f09000b;
         public static final int tv_firstpw=0x7f090007;
-        public static final int tv_inlgpw=0x7f09001c;
+        public static final int tv_inlgpw=0x7f09001a;
         public static final int tv_setpw=0x7f090034;
         public static final int tv_setpw_confirm=0x7f090036;
         public static final int update=0x7f090031;
@@ -533,8 +535,8 @@ public final class R {
         public static final int activity_main=0x7f030000;
         public static final int amend_password=0x7f030001;
         public static final int input=0x7f030002;
-        public static final int item=0x7f030003;
-        public static final int login=0x7f030004;
+        public static final int inputpassword=0x7f030003;
+        public static final int item=0x7f030004;
         public static final int output_select=0x7f030005;
         public static final int output_show=0x7f030006;
         public static final int set_pasword=0x7f030007;
