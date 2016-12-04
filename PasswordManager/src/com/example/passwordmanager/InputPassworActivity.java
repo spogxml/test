@@ -19,6 +19,7 @@ public class InputPassworActivity extends Activity {
 	private EditText et_inlgpw;
 	private Button lg_confirm;
 	private Button lg_cancel;
+	
 	private MyDataDB fdb;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +29,18 @@ public class InputPassworActivity extends Activity {
 		et_inlgpw=(EditText) findViewById(R.id.et_inlgpw);
 		lg_confirm=(Button) findViewById(R.id.lg_confirm);
 		lg_cancel=(Button) findViewById(R.id.lg_cancel);
-
+		
 		//启动时判断是否设置过登陆密码
 		//打开数据库
 		fdb=new MyDataDB();
 		fdb.initDB(InputPassworActivity.this);
 		//查询数据库
-		int r=fdb.queryPW(null,1);
+		int r=fdb.queryLgPW(null);
+		Log.i("info", "r="+r);
 		//如果没有设置过密码则直接显示主页面
 		if(r==0) {
 			Intent toHome=new Intent(InputPassworActivity.this, MainActivity.class);
+			fdb.closeDB();
 			startActivity(toHome);
 			finish();
 		}
@@ -65,9 +68,11 @@ public class InputPassworActivity extends Activity {
 					builder30.show();
 				}//如果不为空则进行匹配查询
 				else{
+					int i=0;
+					//打开数据库进行查询
 					String rs=et_inlgpw.getText().toString();
-					int i=fdb.queryPW(rs,1);
-					//查询成功，进入主页面
+					i=fdb.queryLgPW(rs);
+					fdb.closeDB();					//查询成功，进入主页面
 					if(i==1){
 						AlertDialog.Builder builder31  = new Builder(InputPassworActivity.this);
 						builder31.setTitle("提示！" ) ;
@@ -119,6 +124,7 @@ public class InputPassworActivity extends Activity {
 					@Override
 					public   void  onClick(DialogInterface dialog,  int  which)
 					{
+						fdb.closeDB();
 						finish();  
 					}
 				});
@@ -134,6 +140,7 @@ public class InputPassworActivity extends Activity {
 			}
 		});
 	}
+
 	//自定义返回键功能
 		public boolean onKeyDown(int keyCode, KeyEvent event) {
 			if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -144,6 +151,7 @@ public class InputPassworActivity extends Activity {
 					@Override
 					public   void  onClick(DialogInterface dialog,  int  which)
 					{
+						fdb.closeDB();
 						finish();  
 					}
 				});

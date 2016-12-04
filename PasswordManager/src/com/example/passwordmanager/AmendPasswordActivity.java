@@ -63,7 +63,7 @@ public class AmendPasswordActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				//判断为空和修改密码不一致时的情况
+				//判断输入框为空和修改密码不一致时的情况
 				if(TextUtils.isEmpty(et_firstpw.getText())||TextUtils.isEmpty(et_amendpw.getText())||
 						TextUtils.isEmpty(et_confirmpw.getText())){
 					AlertDialog.Builder builder35  = new Builder(AmendPasswordActivity.this);
@@ -108,7 +108,7 @@ public class AmendPasswordActivity extends Activity {
 						adb=new MyDataDB();
 						adb.initDB(AmendPasswordActivity.this);
 						//查询原密码
-						int a=adb.queryPW(os,j);
+						int a=adb.queryLgPW(os);
 						//如果查询成功，则进行修改
 						if(a==1){
 							int b=adb.updateDB(adata, os);
@@ -179,7 +179,7 @@ public class AmendPasswordActivity extends Activity {
 						adb=new MyDataDB();
 						adb.initDB(AmendPasswordActivity.this);
 						//查询原密码
-						int c=adb.queryPW(os,j);
+						int c=adb.queryItPW(os);
 						//如果查询成功，则进行修改
 						if(c==1){
 							int d=adb.updateDB(adata, os);
@@ -253,6 +253,7 @@ public class AmendPasswordActivity extends Activity {
 					@Override  
 					public void onClick(DialogInterface dialog, int which) {
 						Intent toHome=new Intent(AmendPasswordActivity.this, MainActivity.class);
+						adb.closeDB();
 						startActivity(toHome);
 						finish();
 					}  
@@ -289,6 +290,7 @@ public class AmendPasswordActivity extends Activity {
 				@Override  
 				public void onClick(DialogInterface dialog, int which) {
 					Intent toHome=new Intent(AmendPasswordActivity.this, MainActivity.class);
+					adb.closeDB();
 					startActivity(toHome);
 					finish();
 				}  

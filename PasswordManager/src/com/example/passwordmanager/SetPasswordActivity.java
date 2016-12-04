@@ -22,6 +22,7 @@ public class SetPasswordActivity extends Activity{
 	private TextView tv_setpw_confirm;
 	private Button set_confirm;
 	private Button set_cancel;
+	
 	private MyData spwdata;
 	private MyDataDB sdb;
 	private int i;

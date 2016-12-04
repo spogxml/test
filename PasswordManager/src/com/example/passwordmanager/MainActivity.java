@@ -47,20 +47,41 @@ public class MainActivity extends Activity {
 		sdb=new MyDataDB();
 		sdb.initDB(MainActivity.this);
 		//查询数据库
-		int r1=sdb.queryPW(null,1);
-		int r2=sdb.queryPW(null, 2);
-		//如果设置过登陆密码，则默认显示登陆页面，且主页面的设置登陆密码按钮变为修改密码按钮
-		if(r1==1) {
+		int r1=sdb.queryLgPW(null);
+		int r2=sdb.queryItPW(null);
+		//如果设置过登陆密码，则显示登陆页面，且主页面的设置登陆密码按钮变为修改密码按钮
+		if(r1==1&&r2==0) {
 			set_password.setVisibility(View.GONE);
 			amend_password.setVisibility(View.VISIBLE);
 
-		}
-		//如果设置过加密密码，则主页面的设置加密密码按钮变为修改密码按钮
-		if(r2==1){
+		}//如果设置过加密密码，则主页面的设置加密密码按钮变为修改密码按钮
+		else if(r1==0&&r2==1){
 			set_itpassword.setVisibility(View.GONE);
 			amend_itpassword.setVisibility(View.VISIBLE);
-		}
+		}//如果都设置过，则都显示为修改
+		else if(r1==1&&r2==1){
+			set_password.setVisibility(View.GONE);
+			amend_password.setVisibility(View.VISIBLE);
+			set_itpassword.setVisibility(View.GONE);
+			amend_itpassword.setVisibility(View.VISIBLE);
+		}//如果都没有设置过，则弹出提示框
+		else{
+			AlertDialog.Builder builder48  = new Builder(MainActivity.this);
+			builder48.setTitle("提示！" ) ;
+			builder48.setMessage("您还没有设置登陆密码或加密密码，请尽快设置！" ) ;
+			builder48.setPositiveButton("确认" ,new DialogInterface.OnClickListener()
+			{
 
+				@Override
+				public   void  onClick(DialogInterface dialog,  int  which)
+				{
+					dialog.dismiss();
+				}
+			});
+			builder48.setCancelable(false);
+			builder48.show();
+		}
+		sdb.closeDB();
 		//主界面
 		//输入数据按钮
 		input.setOnClickListener(new OnClickListener() {
@@ -77,7 +98,7 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent otpt_intent=new Intent(MainActivity.this, OutputSelectActivity.class);
+				Intent otpt_intent=new Intent(MainActivity.this, SelectPasswordActivity.class);
 				startActivity(otpt_intent);
 				finish();
 			}
