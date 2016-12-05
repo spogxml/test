@@ -111,7 +111,7 @@ public class AmendPasswordActivity extends Activity {
 						int a=adb.queryLgPW(os);
 						//如果查询成功，则进行修改
 						if(a==1){
-							int b=adb.updateDB(adata, os);
+							int b=adb.updateDB(adata, os,null);
 							//更新成功
 							if(b==1){
 								AlertDialog.Builder builder37  = new Builder(AmendPasswordActivity.this);
@@ -182,7 +182,7 @@ public class AmendPasswordActivity extends Activity {
 						int c=adb.queryItPW(os);
 						//如果查询成功，则进行修改
 						if(c==1){
-							int d=adb.updateDB(adata, os);
+							int d=adb.updateDB(adata, os,null);
 							//更新成功
 							if(d==1){
 								AlertDialog.Builder builder45  = new Builder(AmendPasswordActivity.this);

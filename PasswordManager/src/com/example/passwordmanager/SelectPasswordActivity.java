@@ -21,6 +21,8 @@ public class SelectPasswordActivity extends Activity {
 	private EditText et_initpw;
 	private Button it_confirm;
 	private Button it_cancel;
+	//用来判断是输入页面还是查询页面
+	private int sp;
 
 	private MyDataDB tdb;
 	@Override
@@ -35,7 +37,8 @@ public class SelectPasswordActivity extends Activity {
 
 		tv_initpw.setText("输入加密密码：");
 
-		//启动时判断是否设置过加密密码
+		//启动时判断是否设置过加密密码，并获取intent传递的数据进行判断
+		sp=this.AcceptIntent();
 		//打开数据库
 		tdb=new MyDataDB();
 		tdb.initDB(SelectPasswordActivity.this);
@@ -44,9 +47,27 @@ public class SelectPasswordActivity extends Activity {
 		Log.i("info", "r="+r);
 		//如果没有设置过密码则直接显示查询页面
 		if(r==0) {
-			Intent toSelect=new Intent(SelectPasswordActivity.this,OutputSelectActivity.class);
-			startActivity(toSelect);
-			finish();
+			//如果是输入页面则跳转到输入页面
+			if(sp==1){
+				Intent toInput=new Intent(SelectPasswordActivity.this,InputActivity.class);
+				tdb.closeDB();
+				//传递密码过去
+				Bundle bundle=new Bundle();
+				bundle.putString("key",null);
+				toInput.putExtras(bundle);
+				startActivity(toInput);
+				finish();
+			}else{
+				//否则跳转到查询页面
+				Intent toSelect=new Intent(SelectPasswordActivity.this,OutputSelectActivity.class);
+				tdb.closeDB();
+				//传递密码过去
+				Bundle bundle=new Bundle();
+				bundle.putString("key",null);
+				toSelect.putExtras(bundle);
+				startActivity(toSelect);
+				finish();
+			}
 		}
 		//加密密码输入界面
 		//确认按钮
@@ -87,10 +108,27 @@ public class SelectPasswordActivity extends Activity {
 							@Override
 							public   void  onClick(DialogInterface dialog,  int  which)
 							{
-								Intent toSelect=new Intent(SelectPasswordActivity.this, OutputSelectActivity.class);
-								tdb.closeDB();
-								startActivity(toSelect);
-								finish();
+								//如果是输入页面则跳转到输入页面
+								if(sp==1){
+									Intent toInput=new Intent(SelectPasswordActivity.this,InputActivity.class);
+									tdb.closeDB();
+									//传递密码过去
+									Bundle bundle=new Bundle();
+									bundle.putString("key",et_initpw.getText().toString());
+									toInput.putExtras(bundle);
+									startActivity(toInput);
+									finish();
+								}else{
+									//否则跳转到查询页面
+									Intent toSelect=new Intent(SelectPasswordActivity.this,OutputSelectActivity.class);
+									tdb.closeDB();
+									//传递密码过去
+									Bundle bundle=new Bundle();
+									bundle.putString("key",et_initpw.getText().toString());
+									toSelect.putExtras(bundle);
+									startActivity(toSelect);
+									finish();
+								}
 							}
 						});
 						builder49.setCancelable(false);
@@ -148,32 +186,44 @@ public class SelectPasswordActivity extends Activity {
 		});
 	}
 
+	//接收主页面点击时传来的数据
+	public int AcceptIntent() {
+		MyData mdata=new MyData();
+		Intent intent_accept = getIntent();           //创建一个接收意图
+		Bundle bundle = intent_accept.getExtras();    //创建Bundle对象，用于接收主页面的Intent数据
+		String s=bundle.getString("type");
+		if(s.equals("input")){
+			return 1;
+		}else {
+			return 2;
+		}  
+	}
 	//自定义返回键功能
-		public boolean onKeyDown(int keyCode, KeyEvent event) {
-			if (keyCode == KeyEvent.KEYCODE_BACK) {
-				AlertDialog.Builder builder52  = new Builder(SelectPasswordActivity.this);
-				builder52.setTitle("提示！").setMessage("是否返回主页面!");
-				builder52.setPositiveButton("是",new DialogInterface.OnClickListener()
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			AlertDialog.Builder builder52  = new Builder(SelectPasswordActivity.this);
+			builder52.setTitle("提示！").setMessage("是否返回主页面!");
+			builder52.setPositiveButton("是",new DialogInterface.OnClickListener()
+			{
+				@Override
+				public   void  onClick(DialogInterface dialog,  int  which)
 				{
-					@Override
-					public   void  onClick(DialogInterface dialog,  int  which)
-					{
-						Intent toHome=new Intent(SelectPasswordActivity.this, MainActivity.class);
-						tdb.closeDB();
-						startActivity(toHome); 
-						finish();
-					}
-				});
-				builder52.setNegativeButton("否",new DialogInterface.OnClickListener() {  
-					@Override  
-					public void onClick(DialogInterface dialog, int which) {
+					Intent toHome=new Intent(SelectPasswordActivity.this, MainActivity.class);
+					tdb.closeDB();
+					startActivity(toHome); 
+					finish();
+				}
+			});
+			builder52.setNegativeButton("否",new DialogInterface.OnClickListener() {  
+				@Override  
+				public void onClick(DialogInterface dialog, int which) {
 
-						dialog.dismiss();
-					}  
-				});
-				builder52.setCancelable(false);
-				builder52.show();
-			}
-			return super.onKeyDown(keyCode, event);
+					dialog.dismiss();
+				}  
+			});
+			builder52.setCancelable(false);
+			builder52.show();
 		}
+		return super.onKeyDown(keyCode, event);
+	}
 }

@@ -22,7 +22,8 @@ public class OutputShowActivity extends Activity {
 	private Button update;
 	private Button delete;
 	private Button ot_sh_cancel;
-
+	//key
+	private String oskey=null;
 	//存放数据的中介
 	private MyData ot_shdata;
 	//数据库类
@@ -84,7 +85,7 @@ public class OutputShowActivity extends Activity {
 					//打开数据库，修改数据
 					ot_shDB=new MyDataDB();
 					ot_shDB.initDB(OutputShowActivity.this);
-					int j=ot_shDB.updateDB(tdata, title);
+					int j=ot_shDB.updateDB(tdata, title,oskey);
 					if(j==0){
 						//更新失败
 						AlertDialog.Builder builder7  = new Builder(OutputShowActivity.this);
@@ -119,6 +120,9 @@ public class OutputShowActivity extends Activity {
 									@Override  
 									public void onClick(DialogInterface dialog, int which) {
 										Intent toSelect=new Intent(OutputShowActivity.this, OutputSelectActivity.class);
+										Bundle bundle=new Bundle();
+										bundle.putString("key", oskey);
+										toSelect.putExtras(bundle);
 										startActivity(toSelect);
 										finish();
 									}  
@@ -225,6 +229,9 @@ public class OutputShowActivity extends Activity {
 							@Override  
 							public void onClick(DialogInterface dialog, int which) {
 								Intent toSelect=new Intent(OutputShowActivity.this, OutputSelectActivity.class);
+								Bundle bundle=new Bundle();
+								bundle.putString("key", oskey);
+								toSelect.putExtras(bundle);
 								startActivity(toSelect);
 								finish();
 							}  
@@ -264,6 +271,7 @@ public class OutputShowActivity extends Activity {
 		mdata.user = bundle.getString("user");       //获取Intent的内容
 		mdata.password = bundle.getString("password");       //获取Intent的内容
 		mdata.note = bundle.getString("note");       //获取Intent的内容
+		oskey=bundle.getString("key");
 		return mdata;          
 	}
 
@@ -284,6 +292,9 @@ public class OutputShowActivity extends Activity {
 							@Override  
 							public void onClick(DialogInterface dialog, int which) {
 								Intent toSelect=new Intent(OutputShowActivity.this, OutputSelectActivity.class);
+								Bundle bundle=new Bundle();
+								bundle.putString("key", oskey);
+								toSelect.putExtras(bundle);
 								startActivity(toSelect);
 								finish();
 							}  

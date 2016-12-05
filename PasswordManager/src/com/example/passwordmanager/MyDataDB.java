@@ -32,16 +32,24 @@ public class MyDataDB {
 		pwdb.close();
 	}
 	//插入数据
-	public int insertDB(Context context,MyData data){
+	public int insertDB(Context context,MyData data,String key){
 		long res=1;
 		long res1=1;
 		long res2=1;
 		long res3=1;
+		if(key!=null||!("".equals(key))){
+			defkey=key;
+		}else{
+			defkey="123456";
+		}
 		cv = new ContentValues();
 		if(data.title!=null){
 			cv.put("title", data.title);
 			cv.put("user", data.user);
-			cv.put("password",data.password);
+			//将密码进行编码后存储，默认使用defkey,如果设置过加密密码，则修改defkey的值。
+			String s=data.password;
+			cv.put("password",EncryptUitl.encode(s,defkey));
+			Log.i("info", "插入数据时defkey为："+defkey);
 			cv.put("note", data.note);
 			res1=pwdb.insert("pwtb", null, cv);
 			cv.clear();
@@ -49,15 +57,14 @@ public class MyDataDB {
 		else if(data.lgpassword!=null){
 			//将登陆密码进行编码后存储
 			String s1=data.lgpassword;
-			cv.put("lgpassword", EncryptUitl.encode(s1,defkey));
+			cv.put("lgpassword", EncryptUitl.encode(s1,"123456"));
 			res2=pwdb.insert("ustb", "lgpassword", cv);
-			Log.i("info", "lgpassword="+data.lgpassword+"    res2="+res2);
 			cv.clear();
 		}//设置加密密码
 		else if(data.itpassword!=null){
 			//将加密密码进行编码后存储
 			String s2=data.itpassword;
-			cv.put("itpassword", EncryptUitl.encode(s2,defkey));
+			cv.put("itpassword", EncryptUitl.encode(s2,"123456"));
 			res3=pwdb.insert("ustb", "itpassword", cv);
 			cv.clear();
 		}else{
@@ -74,8 +81,13 @@ public class MyDataDB {
 	}
 
 	//查询数据
-	public List<Map<String,String>> queryDB(String st){
+	public List<Map<String,String>> queryDB(String st,String key){
 		arr_list= new ArrayList<Map<String,String>>();
+		if(key!=null||!("".equals(key))){
+			defkey=key;
+		}else{
+			defkey="123456";
+		}
 		//如果为空则查询全部数据
 		if(("".equals(st))||st==null){
 			Cursor c;
@@ -89,7 +101,8 @@ public class MyDataDB {
 					String note=c.getString(c.getColumnIndex("note"));
 					HM.put("title", title);
 					HM.put("user", user);
-					HM.put("password", password);
+					HM.put("password", EncryptUitl.decode(password,defkey));
+					Log.i("info", "查询全部数据时defkey为："+defkey);
 					HM.put("note", note);
 					arr_list.add(HM);
 				}
@@ -112,7 +125,8 @@ public class MyDataDB {
 					String note=c.getString(c.getColumnIndex("note"));
 					HM.put("title", title);
 					HM.put("user", user);
-					HM.put("password", password);
+					HM.put("password", EncryptUitl.decode(password,defkey));
+					Log.i("info", "查询特定数据时defkey为："+defkey);
 					HM.put("note", note);
 					arr_list.add(HM);
 				}
@@ -129,15 +143,22 @@ public class MyDataDB {
 	}
 
 	//修改数据
-	public int updateDB(MyData udata,String st){
+	public int updateDB(MyData udata,String st,String key){
 		long res1;
 		long res2;
 		long res3;
+		if(key!=null||!("".equals(key))){
+			defkey=key;
+		}else{
+			defkey="123456";
+		}
 		cv=new ContentValues();
 		if(udata.title!=null){
 			cv.put("title", udata.title);
 			cv.put("user", udata.user);
-			cv.put("password", udata.password);
+			//将修改后的密码编码后更新
+			String s=udata.password;
+			cv.put("password", EncryptUitl.encode(s,defkey));
 			cv.put("note", udata.note);
 			//更新数据
 			res1=pwdb.update("pwtb", cv, "title=?", new String[]{st});
@@ -148,9 +169,9 @@ public class MyDataDB {
 		if(udata.lgpassword!=null){
 			//将登陆密码进行编码后更新
 			String s1=udata.lgpassword;
-			cv.put("lgpassword", EncryptUitl.encode(s1,defkey));
+			cv.put("lgpassword", EncryptUitl.encode(s1,"123456"));
 			//更新密码
-			res2=pwdb.update("ustb", cv, "lgpassword=?", new String[]{EncryptUitl.encode(st,defkey)});
+			res2=pwdb.update("ustb", cv, "lgpassword=?", new String[]{EncryptUitl.encode(st,"123456")});
 			cv.clear();
 		}else 
 			res2=1;
@@ -158,9 +179,9 @@ public class MyDataDB {
 		if(udata.itpassword!=null){
 			//将加密密码进行编码后更新
 			String s2=udata.itpassword;
-			cv.put("itpassword", EncryptUitl.encode(s2,defkey));
+			cv.put("itpassword", EncryptUitl.encode(s2,"123456"));
 			//更新密码
-			res3=pwdb.update("ustb", cv, "itpassword=?", new String[]{EncryptUitl.encode(st,defkey)});
+			res3=pwdb.update("ustb", cv, "itpassword=?", new String[]{EncryptUitl.encode(st,"123456")});
 			cv.clear();
 		}else
 			res3=1;
@@ -215,7 +236,6 @@ public class MyDataDB {
 			//查询所有数据
 			Cursor c;
 			c=pwdb.query("ustb",null, "lgpassword>?", new String[]{"0"}, null, null, null);
-			Log.i("info", "c="+c.getCount());
 			if(c!=null&&c.getCount()!=0){
 				//存在数据则返回1
 				res=1;
@@ -225,13 +245,12 @@ public class MyDataDB {
 				res=0;
 				c.close();
 			}
-			Log.i("info", "res="+res);
 		}//如果不为空
 		else{
 			//将密码进行编码后匹配数据库查询
 			//查询
 			Cursor c;
-			c=pwdb.query("ustb", null, "lgpassword Like ?", new String[]{EncryptUitl.encode(st,defkey)}, null, null, null);
+			c=pwdb.query("ustb", null, "lgpassword Like ?", new String[]{EncryptUitl.encode(st,"123456")}, null, null, null);
 			if(c!=null&&c.getCount()!=0){
 				//查询成功
 				c.close();
@@ -268,7 +287,7 @@ public class MyDataDB {
 			//将密码进行编码后匹配数据库查询
 			//查询
 			Cursor c;
-			c=pwdb.query("ustb", null, "itpassword Like ?", new String[]{EncryptUitl.encode(st,defkey)}, null, null, null);
+			c=pwdb.query("ustb", null, "itpassword Like ?", new String[]{EncryptUitl.encode(st,"123456")}, null, null, null);
 			if(c!=null&&c.getCount()!=0){
 				//查询成功
 				c.close();

@@ -100,7 +100,7 @@ public class SetPasswordActivity extends Activity{
 						sdb=new MyDataDB();
 						sdb.initDB(SetPasswordActivity.this);
 						//添加密码
-						int i=sdb.insertDB(SetPasswordActivity.this, spwdata);
+						int i=sdb.insertDB(SetPasswordActivity.this, spwdata,null);
 						//添加失败时弹出对话框
 						if(i==0){
 							AlertDialog.Builder builder26  = new Builder(SetPasswordActivity.this);
@@ -140,7 +140,7 @@ public class SetPasswordActivity extends Activity{
 						sdb=new MyDataDB();
 						sdb.initDB(SetPasswordActivity.this);
 						//添加密码
-						int i=sdb.insertDB(SetPasswordActivity.this, spwdata);
+						int i=sdb.insertDB(SetPasswordActivity.this, spwdata,null);
 						//添加失败时弹出对话框
 						if(i==0){
 							AlertDialog.Builder builder43  = new Builder(SetPasswordActivity.this);

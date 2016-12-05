@@ -26,6 +26,8 @@ public class InputActivity extends Activity {
 	private EditText ed_note;
 	private Button in_confirm;
 	private Button in_cancel;
+	//key
+	private String ikey=null;
 	//存放数据的中介
 	private MyData mdata;
 	//数据库类
@@ -34,7 +36,6 @@ public class InputActivity extends Activity {
 	private int i;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.input);
 		ed_title=(EditText) findViewById(R.id.ed_title);
@@ -43,6 +44,8 @@ public class InputActivity extends Activity {
 		ed_note=(EditText) findViewById(R.id.ed_note);
 		in_confirm=(Button) findViewById(R.id.in_confirm);
 		in_cancel=(Button) findViewById(R.id.in_cancel);
+		//获取key
+		ikey=this.AcceptIntent();
 		//默认标题获取焦点
 		ed_title.requestFocus();
 		//确认按钮的点击事件
@@ -79,7 +82,7 @@ public class InputActivity extends Activity {
 					iDB=new MyDataDB();
 					iDB.initDB(InputActivity.this);
 					List<Map<String,String>> arr_inlist=new ArrayList<Map<String,String>>();
-					arr_inlist=iDB.queryDB(mdata.title);
+					arr_inlist=iDB.queryDB(mdata.title,ikey);
 					//如果有和当前数据一样标题的则不能插入
 					if(arr_inlist!=null){
 						AlertDialog.Builder builder19  = new Builder(InputActivity.this);
@@ -101,7 +104,7 @@ public class InputActivity extends Activity {
 						//打开数据库，插入数据
 						iDB=new MyDataDB();
 						iDB.initDB(InputActivity.this);
-						i=iDB.insertDB(InputActivity.this, mdata);
+						i=iDB.insertDB(InputActivity.this, mdata,ikey);
 						//添加失败时弹出对话框
 						if(i==0){
 							AlertDialog.Builder builder2  = new Builder(InputActivity.this);
@@ -185,6 +188,14 @@ public class InputActivity extends Activity {
 			}
 		});
 	}
+	//接收输入密码页面点击时传来的数据
+		public String AcceptIntent() {
+			MyData mdata=new MyData();
+			Intent intent_accept = getIntent();           //创建一个接收意图
+			Bundle bundle = intent_accept.getExtras();    //创建Bundle对象，用于接收主页面的Intent数据
+			String s=bundle.getString("key");
+			return s;
+		}
 
 	//自定义返回键功能，和取消键一样
 	public boolean onKeyDown(int keyCode, KeyEvent event) {

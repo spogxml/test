@@ -30,7 +30,8 @@ public class OutputSelectActivity extends Activity {
 	private ListView lv_result;
 	private Button ot_confirm;
 	private Button ot_cancel;
-
+	//key
+	private String okey=null;
 	//存放数据的中介
 	private MyData ot_data;
 	//数据库类
@@ -47,7 +48,8 @@ public class OutputSelectActivity extends Activity {
 		lv_result=(ListView) findViewById(R.id.lv_result);
 		ot_confirm=(Button) findViewById(R.id.ot_confirm);
 		ot_cancel=(Button) findViewById(R.id.ot_cancel);
-
+		//获取key
+		okey=this.AcceptIntent();
 		//确认按钮
 		ot_confirm.setOnClickListener(new OnClickListener() {
 
@@ -59,7 +61,7 @@ public class OutputSelectActivity extends Activity {
 					//打开数据库，查询出数据放到集合列表当中
 					otDB=new MyDataDB();
 					otDB.initDB(OutputSelectActivity.this);
-					arr_outlist=otDB.queryDB(et_select.getText().toString());
+					arr_outlist=otDB.queryDB(et_select.getText().toString(),okey);
 					//如果没有存储过数据
 					if(arr_outlist==null){
 						AlertDialog.Builder builder17  = new Builder(OutputSelectActivity.this);
@@ -110,6 +112,7 @@ public class OutputSelectActivity extends Activity {
 								bundle.putString("user", map.get("user"));
 								bundle.putString("password", map.get("password"));
 								bundle.putString("note", map.get("note"));
+								bundle.putString("key", okey);
 								intent.putExtras(bundle);
 								startActivity(intent);
 								finish();
@@ -122,7 +125,7 @@ public class OutputSelectActivity extends Activity {
 					//打开数据库，查询出数据放到集合列表当中
 					otDB=new MyDataDB();
 					otDB.initDB(OutputSelectActivity.this);
-					arr_outlist=otDB.queryDB(et_select.getText().toString());
+					arr_outlist=otDB.queryDB(et_select.getText().toString(),okey);
 					//如果没有查询到数据
 					if(arr_outlist==null){
 						AlertDialog.Builder builder18  = new Builder(OutputSelectActivity.this);
@@ -173,6 +176,7 @@ public class OutputSelectActivity extends Activity {
 								bundle.putString("user", map.get("user"));
 								bundle.putString("password", map.get("password"));
 								bundle.putString("note", map.get("note"));
+								bundle.putString("key", okey);
 								intent.putExtras(bundle);
 								startActivity(intent);
 								finish();
@@ -212,6 +216,15 @@ public class OutputSelectActivity extends Activity {
 				builder9.show();
 			}
 		});
+	}
+
+	//接收输入密码页面点击时传来的数据
+	public String AcceptIntent() {
+		MyData mdata=new MyData();
+		Intent intent_accept = getIntent();           //创建一个接收意图
+		Bundle bundle = intent_accept.getExtras();    //创建Bundle对象，用于接收主页面的Intent数据
+		String s=bundle.getString("key");
+		return s;
 	}
 	//自定义返回键功能，和取消键一样
 	public boolean onKeyDown(int keyCode, KeyEvent event) {

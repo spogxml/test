@@ -88,7 +88,10 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent inpt_intent=new Intent(MainActivity.this, InputActivity.class);
+				Intent inpt_intent=new Intent(MainActivity.this, SelectPasswordActivity.class);
+				Bundle bundle=new Bundle();
+				bundle.putString("type", "input");
+				inpt_intent.putExtras(bundle);
 				startActivity(inpt_intent);
 				finish();
 			}
@@ -99,6 +102,9 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent otpt_intent=new Intent(MainActivity.this, SelectPasswordActivity.class);
+				Bundle bundle=new Bundle();
+				bundle.putString("type", "output");
+				otpt_intent.putExtras(bundle);
 				startActivity(otpt_intent);
 				finish();
 			}

@@ -35,6 +35,9 @@
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"></activity>
          <activity android:name="com.example.passwordmanager.AmendPasswordActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"></activity>
+         <activity android:name="com.example.passwordmanager.SelectPasswordActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"></activity>
+         
     </application>
 
 </manifest>
