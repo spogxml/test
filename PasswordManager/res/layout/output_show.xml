@@ -11,7 +11,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="标题："
-        android:textSize="25dp" />
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/textview_size" />
 
     <TextView
         android:id="@+id/ot_user"
@@ -21,7 +22,8 @@
         android:layout_below="@+id/ot_title"
         android:layout_marginTop="40dp"
         android:text="账号："
-        android:textSize="25dp" />
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/textview_size" />
 
     <TextView
         android:id="@+id/ot_password"
@@ -31,7 +33,8 @@
         android:layout_below="@+id/ot_user"
         android:layout_marginTop="40dp"
         android:text="密码："
-        android:textSize="25dp" />
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/textview_size" />
 
     <TextView
         android:id="@+id/ot_note"
@@ -41,7 +44,8 @@
         android:layout_below="@+id/ot_password"
         android:layout_marginTop="40dp"
         android:text="备注："
-        android:textSize="25dp" />
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/textview_size" />
 
     <EditText
         android:id="@+id/et_ot_title"
@@ -52,8 +56,7 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/ot_title"
         android:background="@drawable/et_shape"
-        android:ems="10"
-        />
+        android:ems="10" />
 
     <EditText
         android:id="@+id/et_ot_user"
@@ -81,13 +84,13 @@
         android:id="@+id/et_ot_note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout4"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/ot_note"
-        android:layout_above="@+id/linearLayout4"
         android:background="@drawable/et_shape"
-        android:gravity="top"
-        android:ems="10" />
+        android:ems="10"
+        android:gravity="top" />
 
     <LinearLayout
         android:id="@+id/linearLayout4"
@@ -96,7 +99,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:orientation="horizontal" >   
+        android:orientation="horizontal" >
 
         <Button
             android:id="@+id/update"
@@ -104,7 +107,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/button_selector"
-            android:text="修改" />
+            android:text="修改"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/button_size" />
 
         <Button
             android:id="@+id/delete"
@@ -112,7 +117,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/button_selector"
-            android:text="删除" />
+            android:text="删除"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/button_size" />
 
         <Button
             android:id="@+id/ot_sh_cancel"
@@ -120,8 +127,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/button_selector"
-            android:text="取消" />
-
+            android:text="取消"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/button_size" />
     </LinearLayout>
 
 </RelativeLayout>

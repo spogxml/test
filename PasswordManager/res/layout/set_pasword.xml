@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:text="设置登陆密码："
+        android:textColor="@color/text_color"
         android:textSize="@dimen/textview_size" />
 
     <EditText
@@ -34,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/et_setpw"
         android:text="确认登陆密码："
+        android:textColor="@color/text_color"
         android:textSize="@dimen/textview_size" />
 
     <EditText
@@ -63,7 +65,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/button_selector"
-            android:text="确认" />
+            android:text="确认"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/button_size" />
 
         <Button
             android:id="@+id/set_cancel"
@@ -71,7 +75,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/button_selector"
-            android:text="取消" />
+            android:text="取消"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/button_size" />
     </LinearLayout>
 
 </RelativeLayout>

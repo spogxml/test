@@ -253,7 +253,6 @@ public class AmendPasswordActivity extends Activity {
 					@Override  
 					public void onClick(DialogInterface dialog, int which) {
 						Intent toHome=new Intent(AmendPasswordActivity.this, MainActivity.class);
-						adb.closeDB();
 						startActivity(toHome);
 						finish();
 					}  
@@ -290,7 +289,6 @@ public class AmendPasswordActivity extends Activity {
 				@Override  
 				public void onClick(DialogInterface dialog, int which) {
 					Intent toHome=new Intent(AmendPasswordActivity.this, MainActivity.class);
-					adb.closeDB();
 					startActivity(toHome);
 					finish();
 				}  

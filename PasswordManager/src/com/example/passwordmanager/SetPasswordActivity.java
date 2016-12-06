@@ -164,6 +164,7 @@ public class SetPasswordActivity extends Activity{
 							builder44.setPositiveButton("返回主页面",new DialogInterface.OnClickListener() {  
 								@Override  
 								public void onClick(DialogInterface dialog, int which) {
+									
 									Intent toHome=new Intent(SetPasswordActivity.this, MainActivity.class);
 									startActivity(toHome);
 									finish();

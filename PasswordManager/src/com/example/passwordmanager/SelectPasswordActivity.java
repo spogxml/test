@@ -50,7 +50,6 @@ public class SelectPasswordActivity extends Activity {
 			//如果是输入页面则跳转到输入页面
 			if(sp==1){
 				Intent toInput=new Intent(SelectPasswordActivity.this,InputActivity.class);
-				tdb.closeDB();
 				//传递密码过去
 				Bundle bundle=new Bundle();
 				bundle.putString("key",null);
@@ -60,7 +59,6 @@ public class SelectPasswordActivity extends Activity {
 			}else{
 				//否则跳转到查询页面
 				Intent toSelect=new Intent(SelectPasswordActivity.this,OutputSelectActivity.class);
-				tdb.closeDB();
 				//传递密码过去
 				Bundle bundle=new Bundle();
 				bundle.putString("key",null);
@@ -111,7 +109,6 @@ public class SelectPasswordActivity extends Activity {
 								//如果是输入页面则跳转到输入页面
 								if(sp==1){
 									Intent toInput=new Intent(SelectPasswordActivity.this,InputActivity.class);
-									tdb.closeDB();
 									//传递密码过去
 									Bundle bundle=new Bundle();
 									bundle.putString("key",et_initpw.getText().toString());
@@ -121,7 +118,6 @@ public class SelectPasswordActivity extends Activity {
 								}else{
 									//否则跳转到查询页面
 									Intent toSelect=new Intent(SelectPasswordActivity.this,OutputSelectActivity.class);
-									tdb.closeDB();
 									//传递密码过去
 									Bundle bundle=new Bundle();
 									bundle.putString("key",et_initpw.getText().toString());
@@ -168,7 +164,6 @@ public class SelectPasswordActivity extends Activity {
 					public   void  onClick(DialogInterface dialog,  int  which)
 					{
 						Intent toHome=new Intent(SelectPasswordActivity.this, MainActivity.class);
-						tdb.closeDB();
 						startActivity(toHome); 
 						finish();  
 					}
@@ -209,7 +204,6 @@ public class SelectPasswordActivity extends Activity {
 				public   void  onClick(DialogInterface dialog,  int  which)
 				{
 					Intent toHome=new Intent(SelectPasswordActivity.this, MainActivity.class);
-					tdb.closeDB();
 					startActivity(toHome); 
 					finish();
 				}

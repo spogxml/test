@@ -28,9 +28,6 @@ public class MyDataDB {
 		helper = new MDHelper(context, DB_Name, null, 1);
 		pwdb=helper.getWritableDatabase();
 	}
-	public void closeDB(){
-		pwdb.close();
-	}
 	//插入数据
 	public int insertDB(Context context,MyData data,String key){
 		long res=1;
@@ -199,8 +196,11 @@ public class MyDataDB {
 	//删除数据
 	public int deleteDB(String st){
 		long res=0;
-		res=pwdb.delete("pwtb", "title=?", new String[]{st});
-		pwdb.close();
+		if(st.equals("deleteall")){
+			res=pwdb.delete("pwtb", null, null);
+		}else{
+			res=pwdb.delete("pwtb", "title=?", new String[]{st});
+		}
 		if(res==0){
 			//删除失败
 			return 0;
@@ -210,23 +210,9 @@ public class MyDataDB {
 		}
 	}
 	//删除密码
-	public int deletePW(String st){
-		long res=0;
-		//删除登陆密码
-		if(st=="lgpassword"){
-			res=pwdb.delete("ustb", "lgpassword", null);
-		}//删除加密密码
-		else if(st=="itpassword"){
-			res=pwdb.delete("ustb", "itpassword", null);
-		}
+	public void deletePW(){
+		pwdb.delete("ustb", null, null);
 		pwdb.close();
-		if(res==0){
-			//删除失败
-			return 0;
-		}else{
-			//删除成功
-			return 1;
-		}
 	}
 	//查询登陆密码
 	public int queryLgPW(String st){

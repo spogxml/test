@@ -40,7 +40,6 @@ public class InputPassworActivity extends Activity {
 		//如果没有设置过密码则直接显示主页面
 		if(r==0) {
 			Intent toHome=new Intent(InputPassworActivity.this, MainActivity.class);
-			fdb.closeDB();
 			startActivity(toHome);
 			finish();
 		}
@@ -72,7 +71,7 @@ public class InputPassworActivity extends Activity {
 					//打开数据库进行查询
 					String rs=et_inlgpw.getText().toString();
 					i=fdb.queryLgPW(rs);
-					fdb.closeDB();					//查询成功，进入主页面
+					//查询成功，进入主页面
 					if(i==1){
 						AlertDialog.Builder builder31  = new Builder(InputPassworActivity.this);
 						builder31.setTitle("提示！" ) ;
@@ -124,7 +123,6 @@ public class InputPassworActivity extends Activity {
 					@Override
 					public   void  onClick(DialogInterface dialog,  int  which)
 					{
-						fdb.closeDB();
 						finish();  
 					}
 				});
@@ -151,7 +149,6 @@ public class InputPassworActivity extends Activity {
 					@Override
 					public   void  onClick(DialogInterface dialog,  int  which)
 					{
-						fdb.closeDB();
 						finish();  
 					}
 				});
