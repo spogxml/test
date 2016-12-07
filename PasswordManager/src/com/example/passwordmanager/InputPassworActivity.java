@@ -41,8 +41,7 @@ public class InputPassworActivity extends Activity {
 		if(r==0) {
 			Intent toHome=new Intent(InputPassworActivity.this, MainActivity.class);
 			startActivity(toHome);
-			finish();
-		}
+			finish(); 
 		//登陆界面
 		//确认登陆按钮
 		lg_confirm.setOnClickListener(new OnClickListener() {

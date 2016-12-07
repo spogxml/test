@@ -79,8 +79,7 @@ public class InputActivity extends Activity {
 
 					//插入数据时先查询判断数据库当中是否有和当前数据标题一样的数据，如果有则提示不能插入，没有则插入
 					//打开数据库，查询数据
-					iDB=new MyDataDB();
-					iDB.initDB(InputActivity.this);
+					iDB=new MyDataDB(InputActivity.this);
 					List<Map<String,String>> arr_inlist=new ArrayList<Map<String,String>>();
 					arr_inlist=iDB.queryDB(mdata.title,ikey);
 					//如果有和当前数据一样标题的则不能插入

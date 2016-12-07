@@ -18,15 +18,15 @@ import android.util.Log;
 public class MyDataDB {
 	private SQLiteDatabase pwdb;
 	private MDHelper helper;
-	private String DB_Name="pwdb.db";
+	private static final  String DB_NAME="pwdb.db";
 	private ContentValues cv;
-	private List<Map<String,String>> arr_list;
+//	private List<Map<String,String>> arr_list;
 	private String defkey="123456";
-
+	
 	//创建数据库，如果存在则打开
-	public void initDB(Context context){
-		helper = new MDHelper(context, DB_Name, null, 1);
-		pwdb=helper.getWritableDatabase();
+	private static SQLiteDatabase getSQLiteDatabase(Context context){
+		MDHelper helper = new MDHelper(context, DB_NAME, null, 1);
+		return helper.getWritableDatabase();
 	}
 	//插入数据
 	public int insertDB(Context context,MyData data,String key){
@@ -78,8 +78,9 @@ public class MyDataDB {
 	}
 
 	//查询数据
-	public List<Map<String,String>> queryDB(String st,String key){
-		arr_list= new ArrayList<Map<String,String>>();
+	public List<Map<String,Object>> queryDB(SQLiteDatabase pwdb ,String st,String key){
+		
+		List<Map<String,Object>> arr_list = new ArrayList<Map<String,Object>>();
 		if(key!=null||!("".equals(key))){
 			defkey=key;
 		}else{
@@ -88,19 +89,45 @@ public class MyDataDB {
 		//如果为空则查询全部数据
 		if(("".equals(st))||st==null){
 			Cursor c;
-			c=pwdb.query("pwtb", null, "_id>?", new String[]{"0"}, null, null, null);
+//			c=pwdb.query("pwtb", null, "_id>?", new String[]{"0"}, null, null, null);
+			
+			c=pwdb.rawQuery(st,null);
 			if(c!=null&&c.getCount()!=0){
 				while(c.moveToNext()){
-					Map<String,String> HM = new HashMap<String,String>();
-					String title=c.getString(c.getColumnIndex("title"));
-					String user=c.getString(c.getColumnIndex("user"));
-					String password=c.getString(c.getColumnIndex("password"));
-					String note=c.getString(c.getColumnIndex("note"));
-					HM.put("title", title);
-					HM.put("user", user);
-					HM.put("password", EncryptUitl.decode(password,defkey));
-					Log.i("info", "查询全部数据时defkey为："+defkey);
-					HM.put("note", note);
+					Map<String,Object> HM = new HashMap<String,Object>();
+					for(int i=0;i<c.getColumnCount();i++){
+						Object o=null ;
+						switch(c.getType(i)){
+						case Cursor.FIELD_TYPE_INTEGER:
+							o=c.getInt(i);
+							break;
+						case Cursor.FIELD_TYPE_BLOB:
+							o=c.getBlob(i);
+							break;
+						case Cursor.FIELD_TYPE_FLOAT:
+							o=c.getFloat(i);
+							break;
+						case Cursor.FIELD_TYPE_STRING:
+							o=c.getString(i);
+							break;
+						case Cursor.FIELD_TYPE_NULL:
+							o=null;
+							break;
+						
+						}
+					
+						HM.put(c.getColumnName(i), o);
+					}
+					
+//					String title=c.getString(c.getColumnIndex(c.getColumnName(columnIndex)));
+//					String user=c.getString(c.getColumnIndex("user"));
+//					String password=c.getString(c.getColumnIndex("password"));
+//					String note=c.getString(c.getColumnIndex("note"));
+//					HM.put("title", title);
+//					HM.put("user", user);
+//					HM.put("password", EncryptUitl.decode(password,defkey));
+//					Log.i("info", "查询全部数据时defkey为："+defkey);
+//					HM.put("note", note);
 					arr_list.add(HM);
 				}
 				c.close();
@@ -136,6 +163,7 @@ public class MyDataDB {
 			pwdb.close();
 		}
 
+		pwdb.close();
 		return arr_list;
 	}
 
