@@ -1,8 +1,8 @@
 eclipse.preferences.version=1
 encoding//src/com/example/passwordmanager/InputActivity.java=UTF-8
-encoding//src/com/example/passwordmanager/MDHelper.java=UTF-8
 encoding//src/com/example/passwordmanager/MainActivity.java=UTF-8
-encoding//src/com/example/passwordmanager/MyDataDB.java=UTF-8
 encoding//src/com/example/passwordmanager/OutputSelectActivity.java=UTF-8
 encoding//src/com/example/passwordmanager/OutputShowActivity.java=UTF-8
+encoding//src/com/example/passwordmanager/dboperate/MDHelper.java=UTF-8
+encoding//src/com/example/passwordmanager/dboperate/MyDataDB.java=UTF-8
 encoding/<project>=UTF-8

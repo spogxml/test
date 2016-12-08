@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.passwordmanager.dboperate.MyData;
+import com.example.passwordmanager.dboperate.MyDataDB;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;

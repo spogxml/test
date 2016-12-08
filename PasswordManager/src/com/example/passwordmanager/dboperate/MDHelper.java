@@ -1,4 +1,4 @@
-package com.example.passwordmanager;
+package com.example.passwordmanager.dboperate;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

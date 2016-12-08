@@ -1,9 +1,10 @@
-package com.example.passwordmanager;
+package com.example.passwordmanager.dboperate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 
 
@@ -16,16 +17,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 public class MyDataDB {
-	private SQLiteDatabase pwdb;
-	private MDHelper helper;
-	private static final  String DB_NAME="pwdb.db";
-	private ContentValues cv;
-//	private List<Map<String,String>> arr_list;
-	private String defkey="123456";
-	
 	//创建数据库，如果存在则打开
-	private static SQLiteDatabase getSQLiteDatabase(Context context){
-		MDHelper helper = new MDHelper(context, DB_NAME, null, 1);
+	public static SQLiteDatabase getSQLiteDatabase(Context context,String dbname){
+		MDHelper helper = new MDHelper(context, dbname, null, 1);
 		return helper.getWritableDatabase();
 	}
 	//插入数据
@@ -39,7 +33,7 @@ public class MyDataDB {
 		}else{
 			defkey="123456";
 		}
-		cv = new ContentValues();
+		ContentValues cv = new ContentValues();
 		if(data.title!=null){
 			cv.put("title", data.title);
 			cv.put("user", data.user);
@@ -78,92 +72,41 @@ public class MyDataDB {
 	}
 
 	//查询数据
-	public List<Map<String,Object>> queryDB(SQLiteDatabase pwdb ,String st,String key){
-		
+	public static List<Map<String,Object>> queryDB(SQLiteDatabase pwdb ,String st){
 		List<Map<String,Object>> arr_list = new ArrayList<Map<String,Object>>();
-		if(key!=null||!("".equals(key))){
-			defkey=key;
-		}else{
-			defkey="123456";
-		}
-		//如果为空则查询全部数据
-		if(("".equals(st))||st==null){
-			Cursor c;
-//			c=pwdb.query("pwtb", null, "_id>?", new String[]{"0"}, null, null, null);
-			
-			c=pwdb.rawQuery(st,null);
-			if(c!=null&&c.getCount()!=0){
-				while(c.moveToNext()){
-					Map<String,Object> HM = new HashMap<String,Object>();
-					for(int i=0;i<c.getColumnCount();i++){
-						Object o=null ;
-						switch(c.getType(i)){
-						case Cursor.FIELD_TYPE_INTEGER:
-							o=c.getInt(i);
-							break;
-						case Cursor.FIELD_TYPE_BLOB:
-							o=c.getBlob(i);
-							break;
-						case Cursor.FIELD_TYPE_FLOAT:
-							o=c.getFloat(i);
-							break;
-						case Cursor.FIELD_TYPE_STRING:
-							o=c.getString(i);
-							break;
-						case Cursor.FIELD_TYPE_NULL:
-							o=null;
-							break;
-						
-						}
-					
-						HM.put(c.getColumnName(i), o);
+		Cursor c;
+		c=pwdb.rawQuery(st,null);
+		if(c!=null&&c.getCount()!=0){
+			while(c.moveToNext()){
+				Map<String,Object> HM = new HashMap<String,Object>();
+				for(int i=0;i<c.getColumnCount();i++){
+					Object o=null ;
+					switch(c.getType(i)){
+					case Cursor.FIELD_TYPE_INTEGER:
+						o=c.getInt(i);
+						break;
+					case Cursor.FIELD_TYPE_BLOB:
+						o=c.getBlob(i);
+						break;
+					case Cursor.FIELD_TYPE_FLOAT:
+						o=c.getFloat(i);
+						break;
+					case Cursor.FIELD_TYPE_STRING:
+						o=c.getString(i);
+						break;
+					case Cursor.FIELD_TYPE_NULL:
+						o=null;
+						break;
 					}
-					
-//					String title=c.getString(c.getColumnIndex(c.getColumnName(columnIndex)));
-//					String user=c.getString(c.getColumnIndex("user"));
-//					String password=c.getString(c.getColumnIndex("password"));
-//					String note=c.getString(c.getColumnIndex("note"));
-//					HM.put("title", title);
-//					HM.put("user", user);
-//					HM.put("password", EncryptUitl.decode(password,defkey));
-//					Log.i("info", "查询全部数据时defkey为："+defkey);
-//					HM.put("note", note);
-					arr_list.add(HM);
+					HM.put(c.getColumnName(i), o);
 				}
-				c.close();
-			}else if(c.getCount()==0){
-				arr_list=null;
-				c.close();
+				arr_list.add(HM);
 			}
-			pwdb.close();
-		}//不为空则查询特定数据
-		else {
-			Cursor c;
-			c=pwdb.query("pwtb", null, "title Like ?", new String[]{"%"+st+"%"}, null, null, null);
-			if(c!=null&&c.getCount()!=0){
-				while(c.moveToNext()){
-					HashMap<String,String> HM = new HashMap<String,String>();
-					String title=c.getString(c.getColumnIndex("title"));
-					String user=c.getString(c.getColumnIndex("user"));
-					String password=c.getString(c.getColumnIndex("password"));
-					String note=c.getString(c.getColumnIndex("note"));
-					HM.put("title", title);
-					HM.put("user", user);
-					HM.put("password", EncryptUitl.decode(password,defkey));
-					Log.i("info", "查询特定数据时defkey为："+defkey);
-					HM.put("note", note);
-					arr_list.add(HM);
-				}
-				c.close();
-			}
-			else if(c.getCount()==0){
-				arr_list=null;
-				c.close();
-			}
-			pwdb.close();
+			c.close();
+		}else if(c.getCount()==0){
+			arr_list=null;
+			c.close();
 		}
-
-		pwdb.close();
 		return arr_list;
 	}
 
@@ -177,7 +120,7 @@ public class MyDataDB {
 		}else{
 			defkey="123456";
 		}
-		cv=new ContentValues();
+		ContentValues cv = new ContentValues();
 		if(udata.title!=null){
 			cv.put("title", udata.title);
 			cv.put("user", udata.user);
@@ -276,7 +219,7 @@ public class MyDataDB {
 				res=0;
 			}
 		}
-		
+
 		return res;
 	}
 	//查询加密密码

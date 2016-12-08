@@ -1,4 +1,4 @@
-package com.example.passwordmanager;
+package com.example.passwordmanager.dboperate;
 
 public class MyData {
 	public String title;
