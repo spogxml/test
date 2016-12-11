@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 public class MydataOperate {
 
 	//插入
-	public void insertAll(Context context,MyData mdata,String key){
+	public void insertAllOpe(Context context,MyData mdata,String key){
 		SQLiteDatabase pwdb=MyDataDB.getSQLiteDatabase(context);//打开数据库
 		String st=null;
 		String[] values;
@@ -27,7 +27,7 @@ public class MydataOperate {
 		//如果数据不为空则插入数据
 		if(mdata.title!=null){
 			st="insert into pwtb (title,user,password,note) values (?,?,?,?)";
-			values=new String[]{mdata.title,mdata.user,mdata.password,mdata.note};
+			values=new String[]{mdata.title,mdata.user,EncryptUitl.encode(mdata.password,defkey),mdata.note};
 		}//否则插入密码
 		else {
 			//如果登陆密码不为空，则设置登陆密码
@@ -40,12 +40,11 @@ public class MydataOperate {
 				values=new String[]{EncryptUitl.encode(mdata.itpassword,defkey)};
 			}
 		}
-
 		MyDataDB.insertDB(pwdb,st,values);//插入数据
 	}
 
 	//查询数据
-	public  List<Map<String,Object>> queryData(Context context ,String title,String key){
+	public  List<Map<String,Object>> queryDataOpe(Context context ,String title,String key){
 		SQLiteDatabase pwdb=MyDataDB.getSQLiteDatabase(context);//打开数据库
 		List<Map<String,Object>> arr_list = new ArrayList<Map<String,Object>>();//接收查询结果集合
 		List<Map<String,Object>> out_list = new ArrayList<Map<String,Object>>();//输出查询结果集合
@@ -99,7 +98,7 @@ public class MydataOperate {
 		return out_list;
 	}
 	//查询登陆密码
-	public  List<Map<String,Object>> queryLg(Context context ,String lgpassword,String key){
+	public  List<Map<String,Object>> queryLgOpe(Context context ,String lgpassword,String key){
 		SQLiteDatabase pwdb=MyDataDB.getSQLiteDatabase(context);//打开数据库
 		List<Map<String,Object>> arr_list = new ArrayList<Map<String,Object>>();//接收查询结果集合
 		List<Map<String,Object>> out_list = new ArrayList<Map<String,Object>>();//输出查询结果集合
@@ -111,7 +110,7 @@ public class MydataOperate {
 			defkey="123456";
 		}
 		//查询结果
-		String st="select * from ustb where lgpassword=?";
+		String st="select lgpassword from ustb where lgpassword=?";
 		String[] vaules=new String[]{EncryptUitl.encode(lgpassword,defkey)};
 		arr_list=MyDataDB.queryDB(pwdb,st,vaules);
 		//如果查询结果为空
@@ -131,7 +130,7 @@ public class MydataOperate {
 		return out_list;
 	}
 	//查询加密密码
-	public  List<Map<String,Object>> queryIt(Context context ,String itpassword,String key){
+	public  List<Map<String,Object>> queryItOpe(Context context ,String itpassword,String key){
 		SQLiteDatabase pwdb=MyDataDB.getSQLiteDatabase(context);//打开数据库
 		List<Map<String,Object>> arr_list = new ArrayList<Map<String,Object>>();//接收查询结果集合
 		List<Map<String,Object>> out_list = new ArrayList<Map<String,Object>>();//输出查询结果集合
@@ -143,7 +142,7 @@ public class MydataOperate {
 			defkey="123456";
 		}
 		//查询结果
-		String st="select * from ustb where itpassword=?";
+		String st="select itpassword from ustb where itpassword=?";
 		String[] vaules=new String[]{EncryptUitl.encode(itpassword,defkey)};
 		arr_list=MyDataDB.queryDB(pwdb,st,vaules);
 		//如果查询结果为空
@@ -163,7 +162,7 @@ public class MydataOperate {
 		return out_list;
 	}
 	//更新
-	public void updateOpe(Context context,MyData mdata,String title,String key){
+	public void updateOpe(Context context,MyData mdata,String data,String key){
 		SQLiteDatabase pwdb=MyDataDB.getSQLiteDatabase(context);//打开数据库
 		String st=null;
 		String[] values=null;
@@ -177,24 +176,24 @@ public class MydataOperate {
 		//如果数据不为空则更新数据
 		if(mdata.title!=null){
 			st="update pwtb set title=?,user=?,password=?,note=? where title=?";
-			values=new String[]{mdata.title,mdata.user,EncryptUitl.encode(mdata.password,defkey),mdata.note,title};
+			values=new String[]{mdata.title,mdata.user,EncryptUitl.encode(mdata.password,defkey),mdata.note,data};
 		}//否则更新密码
 		else {
 			//如果登陆密码不为空，则更新登陆密码
 			if(mdata.lgpassword!=null){
 				st="update ustb set lgpassword=? where lgpassword=?";
-				values=new String[]{EncryptUitl.encode(mdata.lgpassword,defkey)};
+				values=new String[]{EncryptUitl.encode(mdata.lgpassword,defkey),EncryptUitl.encode(data,defkey)};
 			}//否则更新加密密码
 			else if(mdata.itpassword!=null){
 				st="update ustb set itpassword=? where itpassword=?";
-				values=new String[]{EncryptUitl.encode(mdata.itpassword,defkey)};
+				values=new String[]{EncryptUitl.encode(mdata.itpassword,defkey),EncryptUitl.encode(data,defkey)};
 			}
 		}
 		MyDataDB.updateDB(pwdb, st, values);
 	}
 
 	//删除数据
-	public void deleteOpe(Context context ,String title,String key){
+	public void deleteOpe(Context context ,String title){
 		SQLiteDatabase pwdb=MyDataDB.getSQLiteDatabase(context);//打开数据库
 		String st=null;
 		String[] values=null;
@@ -210,5 +209,23 @@ public class MydataOperate {
 		MyDataDB.deleteDB(pwdb, st, values);
 	}
 	//删除登陆密码
+	public void deleteLgOpe(Context context ,String lgpassword){
+		SQLiteDatabase pwdb=MyDataDB.getSQLiteDatabase(context);//打开数据库
+		String st=null;
+		String[] values=null;
+		//用更新来设置lgpassowrd列为空
+		st="update ustb set lgpassword=? where id>?";
+		values=new String[]{null,"0"};
+		MyDataDB.updateDB(pwdb, st, values);
+	}
 	//删除加密密码
+	public void deleteItOpe(Context context ,String title,String key){
+		SQLiteDatabase pwdb=MyDataDB.getSQLiteDatabase(context);//打开数据库
+		String st=null;
+		String[] values=null;
+		//用更新来设置itpassowrd列为空
+		st="update ustb set itpassword=? where id>?";
+		values=new String[]{null,"0"};
+		MyDataDB.updateDB(pwdb, st, values);
+	}
 }
